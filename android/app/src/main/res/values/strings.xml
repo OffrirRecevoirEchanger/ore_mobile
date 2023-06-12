@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">ore_mobile</string>
+    <string name="title_activity_main">ore_mobile</string>
+    <string name="package_name">ca.technolibre.ore</string>
+    <string name="custom_url_scheme">ca.technolibre.ore</string>
+</resources>
