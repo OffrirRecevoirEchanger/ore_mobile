@@ -10,6 +10,14 @@ export class AppComponent {
 	title = 'ore_mobile';
 
 	constructor(private authenticationService: AuthenticationService) {
-		this.authenticationService.authenticate();
+		this.authenticationService.authenticate().subscribe({
+			next: (access_token) => {
+				console.log('access_token');
+				console.log(access_token);
+			},
+			error: (error) => {
+				console.error(error);
+			},
+		});
 	}
 }
