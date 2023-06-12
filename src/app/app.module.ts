@@ -10,18 +10,14 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AuthenticationService } from './services/authentication.service';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HomeComponent,
-    LoginComponent,
-    NavigationComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    NgbModule
-  ],
-  providers: [AuthenticationService],
-  bootstrap: [AppComponent]
+	declarations: [
+		AppComponent,
+		HomeComponent,
+		LoginComponent,
+		NavigationComponent,
+	],
+	imports: [BrowserModule, AppRoutingModule, NgbModule],
+	providers: [AuthenticationService],
+	bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
