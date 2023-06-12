@@ -8,6 +8,7 @@ import { LoginComponent } from './login/login.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AuthenticationService } from './services/authentication.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
 	declarations: [
@@ -16,7 +17,7 @@ import { AuthenticationService } from './services/authentication.service';
 		LoginComponent,
 		NavigationComponent,
 	],
-	imports: [BrowserModule, AppRoutingModule, NgbModule],
+	imports: [BrowserModule, AppRoutingModule, NgbModule, HttpClientModule],
 	providers: [AuthenticationService],
 	bootstrap: [AppComponent],
 })
