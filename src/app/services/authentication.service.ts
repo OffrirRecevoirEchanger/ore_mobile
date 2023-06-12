@@ -3,6 +3,7 @@ import { Capacitor, CapacitorHttp } from '@capacitor/core';
 import { Observable, Subject, from } from 'rxjs';
 import { env } from 'src/environment/environment';
 import { HttpClient } from '@angular/common/http';
+import { SecureStoragePlugin } from 'capacitor-secure-storage-plugin';
 
 @Injectable({
 	providedIn: 'root',
@@ -42,8 +43,11 @@ export class AuthenticationService {
 
 		auth$.subscribe({
 			next: (authResponse) => {
-				console.log('authResponse');
-				console.log(authResponse);
+				const dataObject = Capacitor.isNativePlatform()
+					? authResponse.data
+					: authResponse;
+				subject.next(dataObject.access_token);
+				subject.complete();
 			},
 			error: (error) => {
 				console.error(error);
