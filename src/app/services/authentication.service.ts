@@ -3,7 +3,7 @@ import { Capacitor, CapacitorHttp } from '@capacitor/core';
 import { Observable, Subject, from } from 'rxjs';
 import { env } from 'src/environment/environment';
 import { HttpClient } from '@angular/common/http';
-import { SecureStoragePlugin } from 'capacitor-secure-storage-plugin';
+import { LocalStorageService } from './local-storage/local-storage.service';
 
 @Injectable({
 	providedIn: 'root',
@@ -15,7 +15,10 @@ export class AuthenticationService {
 		return this._loggedIn;
 	}
 
-	constructor(private http: HttpClient) {}
+	constructor(
+		private http: HttpClient,
+		private localStorageService: LocalStorageService
+	) {}
 
 	authenticate(): Observable<any> {
 		const subject = new Subject<any>();
@@ -46,6 +49,10 @@ export class AuthenticationService {
 				const dataObject = Capacitor.isNativePlatform()
 					? authResponse.data
 					: authResponse;
+				this.localStorageService.set(
+					'access_token',
+					dataObject.access_token
+				);
 				subject.next(dataObject.access_token);
 				subject.complete();
 			},
