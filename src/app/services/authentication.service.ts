@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Capacitor, CapacitorHttp } from '@capacitor/core';
-import { Observable, Subject, from } from 'rxjs';
-import { env } from 'src/environment/environment';
-import { HttpClient } from '@angular/common/http';
+import { Observable, Subject } from 'rxjs';
+import { HttpRequestService } from './http-request/http-request.service';
 import { LocalStorageService } from './local-storage/local-storage.service';
 
 @Injectable({
@@ -16,44 +14,27 @@ export class AuthenticationService {
 	}
 
 	constructor(
-		private http: HttpClient,
+		private httpRequestService: HttpRequestService,
 		private localStorageService: LocalStorageService
 	) {}
 
 	authenticate(): Observable<any> {
 		const subject = new Subject<any>();
 
-		let auth$: Observable<any>;
+		const url = '/api/auth/token';
+		const params = {
+			login: 'admin',
+			password: 'admin',
+		};
+		const headers = {};
 
-		if (Capacitor.isNativePlatform()) {
-			auth$ = from(
-				CapacitorHttp.get({
-					url: `${env.apiUrl}/api/auth/token`,
-					params: {
-						login: 'admin',
-						password: 'admin',
-					},
-				})
-			);
-		} else {
-			auth$ = this.http.get(`/api/auth/token`, {
-				params: {
-					login: 'admin',
-					password: 'admin',
-				},
-			});
-		}
-
-		auth$.subscribe({
+		this.httpRequestService.get(url, params, headers).subscribe({
 			next: (authResponse) => {
-				const dataObject = Capacitor.isNativePlatform()
-					? authResponse.data
-					: authResponse;
 				this.localStorageService.set(
 					'access_token',
-					dataObject.access_token
+					authResponse.access_token
 				);
-				subject.next(dataObject.access_token);
+				subject.next(authResponse.access_token);
 				subject.complete();
 			},
 			error: (error) => {
