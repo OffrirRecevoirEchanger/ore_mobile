@@ -11,7 +11,7 @@ export class HttpRequestWebService extends HttpRequestService {
 		super();
 	}
 
-	get(url: string, params: any = null, headers: any = null): Observable<any> {
+	get(url: string, params: any, headers: any): Observable<any> {
 		const subject = new Subject<any>();
 
 		this.http
@@ -32,7 +32,7 @@ export class HttpRequestWebService extends HttpRequestService {
 		return subject.asObservable();
 	}
 
-	post(url: string, data: any = null, headers: any = null): Observable<any> {
+	post(url: string, data: any, headers: any): Observable<any> {
 		const subject = new Subject<any>();
 
 		this.http
@@ -52,7 +52,7 @@ export class HttpRequestWebService extends HttpRequestService {
 		return subject.asObservable();
 	}
 
-	put(url: string, data: any = null, headers: any = null): Observable<any> {
+	put(url: string, data: any, headers: any): Observable<any> {
 		const subject = new Subject<any>();
 
 		this.http.put(url, data, { headers }).subscribe({
@@ -68,7 +68,7 @@ export class HttpRequestWebService extends HttpRequestService {
 		return subject.asObservable();
 	}
 
-	delete(url: string, headers: any = null): Observable<any> {
+	delete(url: string, headers: any): Observable<any> {
 		const subject = new Subject<any>();
 
 		this.http
