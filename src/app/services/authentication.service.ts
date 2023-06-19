@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { HttpRequestService } from './http-request/http-request.service';
 import { LocalStorageService } from './local-storage/local-storage.service';
 
@@ -8,9 +8,18 @@ import { LocalStorageService } from './local-storage/local-storage.service';
 })
 export class AuthenticationService {
 	private _loggedIn = false;
+	private _user = new Subject<any>();
 
-	get loggedIn() {
+	get loggedIn(): boolean {
 		return this._loggedIn;
+	}
+
+	get user$(): Observable<any> {
+		return this._user.asObservable();
+	}
+
+	set user(user: any) {
+		this._user.next(user);
 	}
 
 	constructor(
@@ -40,6 +49,16 @@ export class AuthenticationService {
 			error: (error) => {
 				console.error(error);
 			},
+		});
+
+		return subject.asObservable();
+	}
+
+	getAuthenticationToken(): Observable<any> {
+		const subject = new BehaviorSubject<any>(null);
+
+		this.localStorageService.get('access_token').subscribe((value) => {
+			subject.next(value);
 		});
 
 		return subject.asObservable();

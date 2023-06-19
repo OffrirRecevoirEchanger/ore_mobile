@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthenticationService } from './services/authentication.service';
 import { LocalStorageService } from './services/local-storage/local-storage.service';
+import { OreMembreService } from './services/model/ore-membre.service';
 
 @Component({
 	selector: 'app-root',
@@ -12,8 +13,14 @@ export class AppComponent {
 
 	constructor(
 		private authenticationService: AuthenticationService,
-		private localStorageService: LocalStorageService
+		private localStorageService: LocalStorageService,
+		private oreMembreService: OreMembreService
 	) {
-		this.authenticationService.authenticate();
+		this.authenticationService.authenticate().subscribe((access_token) => {
+			console.log(access_token);
+			this.oreMembreService.get().subscribe((response) => {
+				console.log(response);
+			});
+		});
 	}
 }
