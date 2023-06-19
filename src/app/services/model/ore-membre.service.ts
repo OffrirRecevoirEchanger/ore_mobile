@@ -24,7 +24,7 @@ export class OreMembreService {
 			.pipe(
 				mergeMap((accessToken) => {
 					return this.httpRequestService.get(
-						`/api/${this.resPartnerModelName}`,
+						`/api/${this.modelName}`,
 						{},
 						{
 							access_token: accessToken,
