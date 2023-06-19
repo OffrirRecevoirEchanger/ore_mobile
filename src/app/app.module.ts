@@ -13,6 +13,7 @@ import { localStorageServiceFactory } from './factories/local-storage.service.fa
 import { LocalStorageService } from './services/local-storage/local-storage.service';
 import { HttpRequestService } from './services/http-request/http-request.service';
 import { httpRequestServiceFactory } from './factories/http-request.service.factory';
+import { OreMembreService } from './services/model/ore-membre.service';
 
 @NgModule({
 	declarations: [
@@ -24,6 +25,7 @@ import { httpRequestServiceFactory } from './factories/http-request.service.fact
 	imports: [BrowserModule, AppRoutingModule, NgbModule, HttpClientModule],
 	providers: [
 		AuthenticationService,
+		OreMembreService,
 		{
 			provide: LocalStorageService,
 			useFactory: localStorageServiceFactory,
