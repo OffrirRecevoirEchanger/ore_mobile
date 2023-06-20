@@ -1,5 +1,5 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { ApiAuthenticationService } from '../services/api-authentication.service';
+import { LoginService } from '../services/login.service';
 
 @Component({
 	selector: 'app-home',
@@ -9,8 +9,8 @@ import { ApiAuthenticationService } from '../services/api-authentication.service
 export class HomeComponent {
 	@ViewChild('profilePicture') profilePicture!: ElementRef;
 
-	constructor(private apiAuthenticationService: ApiAuthenticationService) {
-		this.apiAuthenticationService.user$.subscribe((user) => {
+	constructor(private loginService: LoginService) {
+		this.loginService.user$.subscribe((user) => {
 			const cleanByteArray = user.logo.slice(2, -3);
 			const dataUrl = `data:image/png;base64,${cleanByteArray}`;
 			this.profilePicture.nativeElement.src = dataUrl;

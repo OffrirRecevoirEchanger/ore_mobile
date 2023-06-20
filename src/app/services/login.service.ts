@@ -1,9 +1,19 @@
 import { Injectable } from '@angular/core';
+import { Observable, Subject } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+	providedIn: 'root',
 })
 export class LoginService {
+	private _user = new Subject<any>();
 
-  constructor() { }
+	get user$(): Observable<any> {
+		return this._user.asObservable();
+	}
+
+	set user(user: any) {
+		this._user.next(user);
+	}
+
+	constructor() {}
 }

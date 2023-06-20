@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ApiAuthenticationService } from '../services/api-authentication.service';
+import { LoginService } from '../services/login.service';
 
 @Component({
 	selector: 'app-navigation',
@@ -7,9 +7,11 @@ import { ApiAuthenticationService } from '../services/api-authentication.service
 	styleUrls: ['./navigation.component.scss'],
 })
 export class NavigationComponent {
-	get loggedIn() {
-		return this.apiAuthenticationService.loggedIn;
-	}
+	user: any;
 
-	constructor(private apiAuthenticationService: ApiAuthenticationService) {}
+	constructor(private loginService: LoginService) {
+		this.loginService.user$.subscribe((value) => {
+			this.user = value;
+		});
+	}
 }
