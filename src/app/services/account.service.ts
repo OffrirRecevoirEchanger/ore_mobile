@@ -4,7 +4,7 @@ import { Observable, Subject } from 'rxjs';
 @Injectable({
 	providedIn: 'root',
 })
-export class LoginService {
+export class AccountService {
 	private _user = new Subject<any>();
 
 	get user$(): Observable<any> {

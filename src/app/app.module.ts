@@ -9,7 +9,7 @@ import { LoginComponent } from './login/login.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ApiAuthenticationService } from './services/api-authentication.service';
-import { LoginService } from './services/login.service';
+import { AccountService } from './services/account.service';
 import { localStorageServiceFactory } from './factories/local-storage.service.factory';
 import { LocalStorageService } from './services/local-storage/local-storage.service';
 import { HttpRequestService } from './services/http-request/http-request.service';
@@ -26,7 +26,7 @@ import { OreMembreService } from './services/model/ore-membre.service';
 	imports: [BrowserModule, AppRoutingModule, NgbModule, HttpClientModule],
 	providers: [
 		ApiAuthenticationService,
-		LoginService,
+		AccountService,
 		OreMembreService,
 		{
 			provide: LocalStorageService,

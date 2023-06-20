@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { LoginService } from '../services/login.service';
+import { AccountService } from '../services/account.service';
 
 @Component({
 	selector: 'app-navigation',
@@ -9,8 +9,8 @@ import { LoginService } from '../services/login.service';
 export class NavigationComponent {
 	user: any;
 
-	constructor(private loginService: LoginService) {
-		this.loginService.user$.subscribe((value) => {
+	constructor(private accountService: AccountService) {
+		this.accountService.user$.subscribe((value) => {
 			this.user = value;
 		});
 	}

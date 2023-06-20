@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpRequestService } from '../http-request/http-request.service';
 import { ApiAuthenticationService } from '../api-authentication.service';
 import { Observable, Subject, mergeMap } from 'rxjs';
-import { LoginService } from '../login.service';
+import { AccountService } from '../account.service';
 
 @Injectable({
 	providedIn: 'root',
@@ -14,7 +14,7 @@ export class OreMembreService {
 	constructor(
 		private httpRequestService: HttpRequestService,
 		private apiAuthenticationService: ApiAuthenticationService,
-		private loginService: LoginService
+		private accountService: AccountService
 	) {}
 
 	get(): Observable<any> {
@@ -36,7 +36,7 @@ export class OreMembreService {
 			)
 			.subscribe((value) => {
 				console.log(value);
-				this.loginService.user = value.data[1];
+				this.accountService.user = value.data[1];
 			});
 
 		return subject.asObservable();
