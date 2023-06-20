@@ -1,6 +1,8 @@
 #profile-picture {
 	display: block;
-	width: 200px;
-	height: 200px;
-	background-color: #222;
+	width: 100px;
+	height: 100px;
+	object-fit: cover;
+	padding: 1rem;
+	border-radius: 50%;
 }
