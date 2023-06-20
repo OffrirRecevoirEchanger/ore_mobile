@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AuthenticationService } from '../services/authentication.service';
+import { ApiAuthenticationService } from '../services/api-authentication.service';
 
 @Component({
 	selector: 'app-navigation',
@@ -8,8 +8,8 @@ import { AuthenticationService } from '../services/authentication.service';
 })
 export class NavigationComponent {
 	get loggedIn() {
-		return this.authenticationService.loggedIn;
+		return this.apiAuthenticationService.loggedIn;
 	}
 
-	constructor(private authenticationService: AuthenticationService) {}
+	constructor(private apiAuthenticationService: ApiAuthenticationService) {}
 }

@@ -7,7 +7,7 @@ import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { AuthenticationService } from './services/authentication.service';
+import { ApiAuthenticationService } from './services/api-authentication.service';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { localStorageServiceFactory } from './factories/local-storage.service.factory';
 import { LocalStorageService } from './services/local-storage/local-storage.service';
@@ -24,7 +24,7 @@ import { OreMembreService } from './services/model/ore-membre.service';
 	],
 	imports: [BrowserModule, AppRoutingModule, NgbModule, HttpClientModule],
 	providers: [
-		AuthenticationService,
+		ApiAuthenticationService,
 		OreMembreService,
 		{
 			provide: LocalStorageService,

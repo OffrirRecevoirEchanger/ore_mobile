@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
-import { AuthenticationService } from '../services/authentication.service';
+import { ApiAuthenticationService } from '../services/api-authentication.service';
 
 @Component({
 	selector: 'app-home',
@@ -13,8 +13,8 @@ export class HomeComponent implements AfterViewInit {
 		this.profilePicture.nativeElement;
 	}
 
-	constructor(private authenticationService: AuthenticationService) {
-		this.authenticationService.user$.subscribe((user) => {
+	constructor(private apiAuthenticationService: ApiAuthenticationService) {
+		this.apiAuthenticationService.user$.subscribe((user) => {
 			console.log(user.name);
 			const cleanByteArray = user.logo.slice(2, -3);
 			const dataUrl = `data:image/png;base64,${cleanByteArray}`;

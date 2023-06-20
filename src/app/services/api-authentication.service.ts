@@ -6,7 +6,7 @@ import { LocalStorageService } from './local-storage/local-storage.service';
 @Injectable({
 	providedIn: 'root',
 })
-export class AuthenticationService {
+export class ApiAuthenticationService {
 	private _loggedIn = false;
 	private _user = new Subject<any>();
 
