@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { Observable, ReplaySubject } from 'rxjs';
 
 @Injectable({
 	providedIn: 'root',
 })
 export class AccountService {
-	private _user = new Subject<any>();
+	private _user = new ReplaySubject<any>();
 
 	get user$(): Observable<any> {
 		return this._user.asObservable();
