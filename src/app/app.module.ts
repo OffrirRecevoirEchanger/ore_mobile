@@ -15,6 +15,7 @@ import { LocalStorageService } from './services/local-storage/local-storage.serv
 import { HttpRequestService } from './services/http-request/http-request.service';
 import { httpRequestServiceFactory } from './factories/http-request.service.factory';
 import { OreMembreService } from './services/model/ore-membre.service';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
 	declarations: [
@@ -23,7 +24,13 @@ import { OreMembreService } from './services/model/ore-membre.service';
 		LoginComponent,
 		NavigationComponent,
 	],
-	imports: [BrowserModule, AppRoutingModule, NgbModule, HttpClientModule],
+	imports: [
+		BrowserModule,
+		AppRoutingModule,
+		NgbModule,
+		HttpClientModule,
+		ReactiveFormsModule,
+	],
 	providers: [
 		ApiAuthenticationService,
 		AccountService,
