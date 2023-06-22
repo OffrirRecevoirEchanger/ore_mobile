@@ -15,14 +15,5 @@ export class AppComponent {
 		private apiAuthenticationService: ApiAuthenticationService,
 		private localStorageService: LocalStorageService,
 		private oreMembreService: OreMembreService
-	) {
-		this.apiAuthenticationService
-			.authenticate()
-			.subscribe((access_token) => {
-				console.log(access_token);
-				this.oreMembreService.get().subscribe((response) => {
-					console.log(response);
-				});
-			});
-	}
+	) {}
 }
