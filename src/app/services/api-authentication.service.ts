@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { Observable, ReplaySubject, Subject } from 'rxjs';
 import { HttpRequestService } from './http-request/http-request.service';
 import { LocalStorageService } from './local-storage/local-storage.service';
+import { ApiAuthenticationData } from '../models/api-authentication-data';
 
 @Injectable({
 	providedIn: 'root',
@@ -12,23 +13,30 @@ export class ApiAuthenticationService {
 		private localStorageService: LocalStorageService
 	) {}
 
-	authenticate(): Observable<any> {
+	authenticate(
+		login: string,
+		password: string
+	): Observable<ApiAuthenticationData> {
 		const subject = new Subject<any>();
 
 		const url = '/api/auth/token';
 		const params = {
-			login: 'admin',
-			password: 'admin',
+			login,
+			password,
 		};
 		const headers = {};
 
 		this.httpRequestService.get(url, params, headers).subscribe({
 			next: (authResponse) => {
-				this.localStorageService.set(
-					'access_token',
+				const apiAuthData = new ApiAuthenticationData(
+					authResponse.uid,
 					authResponse.access_token
 				);
-				subject.next(authResponse.access_token);
+				this.localStorageService.set(
+					'api_authentication_data',
+					apiAuthData
+				);
+				subject.next(apiAuthData);
 				subject.complete();
 			},
 			error: (error) => {
@@ -39,12 +47,14 @@ export class ApiAuthenticationService {
 		return subject.asObservable();
 	}
 
-	getAuthenticationToken(): Observable<any> {
-		const subject = new BehaviorSubject<any>(null);
+	getAuthData(): Observable<ApiAuthenticationData> {
+		const subject = new ReplaySubject<ApiAuthenticationData>();
 
-		this.localStorageService.get('access_token').subscribe((value) => {
-			subject.next(value);
-		});
+		this.localStorageService
+			.get('api_authentication_data')
+			.subscribe((value) => {
+				subject.next(value);
+			});
 
 		return subject.asObservable();
 	}
