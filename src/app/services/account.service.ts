@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, ReplaySubject } from 'rxjs';
+import { ApiAuthenticationService } from './api-authentication.service';
 
 @Injectable({
 	providedIn: 'root',
@@ -15,5 +16,9 @@ export class AccountService {
 		this._user.next(user);
 	}
 
-	constructor() {}
+	constructor(private apiAuthenticationService: ApiAuthenticationService) {}
+
+	login(username: string, password: string) {
+		this.apiAuthenticationService.authenticate(username, password);
+	}
 }
