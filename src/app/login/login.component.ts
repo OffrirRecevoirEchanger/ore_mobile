@@ -1,5 +1,11 @@
-import { Component } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { Component, ElementRef, ViewChild } from '@angular/core';
+import {
+	AbstractControl,
+	FormControl,
+	FormGroup,
+	Validators,
+} from '@angular/forms';
+import { ApiAuthenticationService } from '../services/api-authentication.service';
 
 @Component({
 	selector: 'app-login',
@@ -21,8 +27,22 @@ export class LoginComponent {
 		return this.loginFormGroup.get('password');
 	}
 
+	constructor(private apiAuthenticationService: ApiAuthenticationService) {}
+
 	login() {
-		console.log('Submitted');
+		if (this.loginFormGroup.invalid) {
+			this.loginFormGroup.markAllAsTouched();
+			return;
+		}
+
+		this.apiAuthenticationService
+			.authenticate(
+				this.usernameControl?.value || '',
+				this.passwordControl?.value || ''
+			)
+			.subscribe((response) => {
+				console.log(response);
+			});
 	}
 
 	isInvalid(control: AbstractControl) {
