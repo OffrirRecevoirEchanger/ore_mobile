@@ -7,20 +7,25 @@ import { FormControl, FormGroup } from '@angular/forms';
 	styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent {
+	@ViewChild('loginForm') loginForm!: ElementRef;
 	loginFormGroup = new FormGroup({
-		username: new FormControl(''),
-		password: new FormControl(''),
+		username: new FormControl('', [Validators.required]),
+		password: new FormControl('', [Validators.required]),
 	});
 
-	get username() {
-		return this.loginFormGroup.get('username')?.value;
+	get usernameControl() {
+		return this.loginFormGroup.get('username');
 	}
 
-	get password() {
-		return this.loginFormGroup.get('password')?.value;
+	get passwordControl() {
+		return this.loginFormGroup.get('password');
 	}
 
 	login() {
 		console.log('Submitted');
+	}
+
+	isInvalid(control: AbstractControl) {
+		return control.errors && (control.touched || control.dirty);
 	}
 }
