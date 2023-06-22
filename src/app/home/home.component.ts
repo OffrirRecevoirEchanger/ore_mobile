@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { AccountService } from '../services/account.service';
 
 @Component({
@@ -6,10 +6,12 @@ import { AccountService } from '../services/account.service';
 	templateUrl: './home.component.html',
 	styleUrls: ['./home.component.scss'],
 })
-export class HomeComponent {
+export class HomeComponent implements AfterViewInit {
 	@ViewChild('profilePicture') profilePicture!: ElementRef;
 
-	constructor(private accountService: AccountService) {
+	constructor(private accountService: AccountService) {}
+
+	ngAfterViewInit() {
 		this.accountService.user$.subscribe((user) => {
 			const cleanByteArray = user.logo.slice(2, -3);
 			const dataUrl = `data:image/png;base64,${cleanByteArray}`;
