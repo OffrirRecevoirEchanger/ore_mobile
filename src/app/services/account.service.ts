@@ -27,7 +27,14 @@ export class AccountService {
 	constructor(
 		private apiAuthenticationService: ApiAuthenticationService,
 		private oreMembreService: OreMembreService
-	) {}
+	) {
+		this.oreMembreService.get().subscribe((user) => {
+			if (this.user) {
+				this.user = user;
+			}
+			this._isDoneFetchingLocalUser.next(true);
+		});
+	}
 
 	login(username: string, password: string) {
 		const subject = new Subject<any>();
