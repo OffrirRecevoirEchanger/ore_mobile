@@ -5,7 +5,8 @@ import {
 	FormGroup,
 	Validators,
 } from '@angular/forms';
-import { ApiAuthenticationService } from '../services/api-authentication.service';
+import { AccountService } from '../services/account.service';
+import { Router } from '@angular/router';
 
 @Component({
 	selector: 'app-login',
@@ -27,7 +28,10 @@ export class LoginComponent {
 		return this.loginFormGroup.get('password');
 	}
 
-	constructor(private apiAuthenticationService: ApiAuthenticationService) {}
+	constructor(
+		private accountService: AccountService,
+		private router: Router
+	) {}
 
 	login() {
 		if (this.loginFormGroup.invalid) {
@@ -35,13 +39,14 @@ export class LoginComponent {
 			return;
 		}
 
-		this.apiAuthenticationService
-			.authenticate(
+		this.accountService
+			.login(
 				this.usernameControl?.value || '',
 				this.passwordControl?.value || ''
 			)
 			.subscribe((response) => {
-				console.log(response);
+				this.accountService.user = response;
+				this.router.navigate(['/']);
 			});
 	}
 

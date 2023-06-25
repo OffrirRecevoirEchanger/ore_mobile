@@ -1,42 +1,49 @@
 import { Injectable } from '@angular/core';
 import { HttpRequestService } from '../http-request/http-request.service';
 import { ApiAuthenticationService } from '../api-authentication.service';
-import { Observable, Subject, mergeMap } from 'rxjs';
-import { AccountService } from '../account.service';
+import { Observable, ReplaySubject, concatMap } from 'rxjs';
 
 @Injectable({
 	providedIn: 'root',
 })
 export class OreMembreService {
 	private modelName = 'ore.membre';
-	private resPartnerModelName = 'res.partner';
 
 	constructor(
 		private httpRequestService: HttpRequestService,
-		private apiAuthenticationService: ApiAuthenticationService,
-		private accountService: AccountService
+		private apiAuthenticationService: ApiAuthenticationService
 	) {}
 
 	get(): Observable<any> {
-		const subject = new Subject<any>();
+		const subject = new ReplaySubject<any>();
 
 		this.apiAuthenticationService
-			.getAuthenticationToken()
+			.getAuthData()
 			.pipe(
-				mergeMap((accessToken) => {
-					return this.httpRequestService.get(
-						`/api/${this.modelName}`,
-						{},
-						{
-							access_token: accessToken,
-							'Content-Type': 'application/jsonp',
-						}
-					);
+				concatMap((authData) => {
+					if (!authData) {
+						const noAuthDataSubject = new ReplaySubject<any>();
+						noAuthDataSubject.next(null);
+						noAuthDataSubject.complete();
+						return noAuthDataSubject.asObservable();
+					} else {
+						const domain = `partner_id.id:=:${authData.partnerId}`;
+						return this.httpRequestService.get(
+							`/api/${this.modelName}`,
+							{
+								domain,
+							},
+							{
+								access_token: authData.accessToken,
+								'Content-Type': 'application/jsonp',
+							}
+						);
+					}
 				})
 			)
 			.subscribe((value) => {
-				console.log(value);
-				this.accountService.user = value.data[1];
+				subject.next(value ? value?.data[0] : null);
+				subject.complete();
 			});
 
 		return subject.asObservable();

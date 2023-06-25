@@ -30,11 +30,12 @@ export class ApiAuthenticationService {
 			next: (authResponse) => {
 				const apiAuthData = new ApiAuthenticationData(
 					authResponse.uid,
+					authResponse.partner_id,
 					authResponse.access_token
 				);
 				this.localStorageService.set(
 					'api_authentication_data',
-					apiAuthData
+					JSON.stringify(apiAuthData)
 				);
 				subject.next(apiAuthData);
 				subject.complete();
@@ -53,7 +54,19 @@ export class ApiAuthenticationService {
 		this.localStorageService
 			.get('api_authentication_data')
 			.subscribe((value) => {
-				subject.next(value);
+				if (!value) {
+					subject.next(value);
+					subject.complete();
+				} else {
+					const valueObject = JSON.parse(value);
+					const apiAuthData = new ApiAuthenticationData(
+						valueObject.uid,
+						valueObject.partnerId,
+						valueObject.accessToken
+					);
+					subject.next(apiAuthData);
+					subject.complete();
+				}
 			});
 
 		return subject.asObservable();
