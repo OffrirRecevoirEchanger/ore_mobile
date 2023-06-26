@@ -12,7 +12,7 @@ export class LocalStorageNativeService extends LocalStorageService {
 
 		from(SecureStoragePlugin.get({ key })).subscribe({
 			next: (storageResponse) => {
-				subject.next(storageResponse);
+				subject.next(storageResponse.value);
 				subject.complete();
 			},
 			error: (error) => {
