@@ -29,7 +29,7 @@ export class AccountService {
 		private oreMembreService: OreMembreService
 	) {
 		this.oreMembreService.get().subscribe((user) => {
-			if (this.user) {
+			if (user) {
 				this.user = user;
 			}
 			this._isDoneFetchingLocalUser.next(true);
