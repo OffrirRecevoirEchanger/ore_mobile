@@ -32,6 +32,7 @@ export class OreMembreService {
 							`/api/${this.modelName}`,
 							{
 								domain,
+								fields: 'image,name,partner_id',
 							},
 							{
 								access_token: authData.accessToken,
