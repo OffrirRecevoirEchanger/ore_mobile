@@ -1,0 +1,8 @@
+<div
+	class="error-alert__wrapper error-alert--active"
+	[ngClass]="{ 'error-alert--active': showErrorMessage }"
+>
+	<div class="alert alert-danger error-alert" role="alert">
+		{{ errorMessage }}
+	</div>
+</div>

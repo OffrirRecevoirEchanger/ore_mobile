@@ -17,6 +17,7 @@ import { httpRequestServiceFactory } from './factories/http-request.service.fact
 import { OreMembreService } from './services/model/ore-membre.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ErrorHandlerService } from './services/error-handler.service';
+import { ErrorAlertComponent } from './error-alert/error-alert.component';
 
 @NgModule({
 	declarations: [
@@ -24,6 +25,7 @@ import { ErrorHandlerService } from './services/error-handler.service';
 		HomeComponent,
 		LoginComponent,
 		NavigationComponent,
+		ErrorAlertComponent,
 	],
 	imports: [
 		BrowserModule,
@@ -47,7 +49,7 @@ import { ErrorHandlerService } from './services/error-handler.service';
 		},
 		{
 			provide: ErrorHandler,
-			useClass: ErrorHandlerService,
+			useExisting: ErrorHandlerService,
 		},
 	],
 	bootstrap: [AppComponent],

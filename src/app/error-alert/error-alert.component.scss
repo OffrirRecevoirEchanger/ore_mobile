@@ -1,0 +1,17 @@
+.error-alert__wrapper {
+	padding: 1rem 1rem 0 1rem;
+	position: absolute;
+	transform: translateY(-100%);
+	transition: transform 150ms ease-in-out;
+	width: 100%;
+	z-index: 999;
+}
+
+.error-alert {
+	margin: 0;
+	width: 100%;
+}
+
+.error-alert--active {
+	transform: translateY(0);
+}
