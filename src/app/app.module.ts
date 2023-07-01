@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { ErrorHandler, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { HttpClient, HttpClientModule } from '@angular/common/http';
@@ -16,6 +16,7 @@ import { HttpRequestService } from './services/http-request/http-request.service
 import { httpRequestServiceFactory } from './factories/http-request.service.factory';
 import { OreMembreService } from './services/model/ore-membre.service';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ErrorHandlerService } from './services/error-handler.service';
 
 @NgModule({
 	declarations: [
@@ -43,6 +44,10 @@ import { ReactiveFormsModule } from '@angular/forms';
 			provide: HttpRequestService,
 			useFactory: httpRequestServiceFactory,
 			deps: [HttpClient],
+		},
+		{
+			provide: ErrorHandler,
+			useClass: ErrorHandlerService,
 		},
 	],
 	bootstrap: [AppComponent],

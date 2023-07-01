@@ -19,14 +19,9 @@ export class HttpRequestWebService extends HttpRequestService {
 				params,
 				headers,
 			})
-			.subscribe({
-				next: (getResponse) => {
-					subject.next(getResponse);
-					subject.complete();
-				},
-				error: (error) => {
-					console.error(error);
-				},
+			.subscribe((getResponse) => {
+				subject.next(getResponse);
+				subject.complete();
 			});
 
 		return subject.asObservable();
@@ -39,14 +34,9 @@ export class HttpRequestWebService extends HttpRequestService {
 			.post(url, data, {
 				headers,
 			})
-			.subscribe({
-				next: (postResponse) => {
-					subject.next(postResponse);
-					subject.complete();
-				},
-				error: (error) => {
-					console.error(error);
-				},
+			.subscribe((postResponse) => {
+				subject.next(postResponse);
+				subject.complete();
 			});
 
 		return subject.asObservable();
@@ -55,14 +45,9 @@ export class HttpRequestWebService extends HttpRequestService {
 	put(url: string, data: any, headers: any): Observable<any> {
 		const subject = new Subject<any>();
 
-		this.http.put(url, data, { headers }).subscribe({
-			next: (putResponse) => {
-				subject.next(putResponse);
-				subject.complete();
-			},
-			error: (error) => {
-				console.error(error);
-			},
+		this.http.put(url, data, { headers }).subscribe((putResponse) => {
+			subject.next(putResponse);
+			subject.complete();
 		});
 
 		return subject.asObservable();
@@ -75,14 +60,9 @@ export class HttpRequestWebService extends HttpRequestService {
 			.delete(url, {
 				headers,
 			})
-			.subscribe({
-				next: (deleteResponse) => {
-					subject.next(deleteResponse);
-					subject.complete();
-				},
-				error: (error) => {
-					console.error(error);
-				},
+			.subscribe((deleteResponse) => {
+				subject.next(deleteResponse);
+				subject.complete();
 			});
 
 		return subject.asObservable();
