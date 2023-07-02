@@ -55,4 +55,12 @@ export class AccountService {
 	isAuthenticated(): boolean {
 		return this._user ? true : false;
 	}
+
+	logout() {
+		this.apiAuthenticationService.deleteAuthData().subscribe((response) => {
+			if (response) {
+				this.user = null;
+			}
+		});
+	}
 }

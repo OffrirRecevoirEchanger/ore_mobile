@@ -9,12 +9,16 @@ export class LocalStorageWebService extends LocalStorageService {
 	get(key: string): Observable<any> {
 		return of(localStorage.getItem(key));
 	}
+
 	set(key: string, value: any): void {
 		localStorage.setItem(key, value);
 	}
-	remove(key: string): void {
+
+	remove(key: string): Observable<any> {
 		localStorage.removeItem(key);
+		return of(true);
 	}
+
 	clear(): void {
 		localStorage.clear();
 	}

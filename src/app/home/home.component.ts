@@ -13,7 +13,7 @@ export class HomeComponent implements AfterViewInit {
 
 	ngAfterViewInit() {
 		this.accountService.user$.subscribe((user) => {
-			if (user.image) {
+			if (user && user.image) {
 				const cleanByteArray = user.image.slice(2, -3);
 				const dataUrl = `data:image/png;base64,${cleanByteArray}`;
 				this.profilePicture.nativeElement.src = dataUrl;

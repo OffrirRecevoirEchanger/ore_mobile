@@ -71,4 +71,8 @@ export class ApiAuthenticationService {
 
 		return subject.asObservable();
 	}
+
+	deleteAuthData(): Observable<any> {
+		return this.localStorageService.remove('api_authentication_data');
+	}
 }
