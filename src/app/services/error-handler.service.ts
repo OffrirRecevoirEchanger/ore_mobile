@@ -23,9 +23,9 @@ export class ErrorHandlerService implements ErrorHandler {
 			error.url.includes('/longpolling/poll')
 		) {
 			response = error.message || error.error;
-		} else if (error.error === true) {
+		} else if (error.error === true && error.data?.message) {
 			response = error.data.message;
-		} else if (error.error.message) {
+		} else if (error.error?.message) {
 			response = error.error.message;
 		}
 
