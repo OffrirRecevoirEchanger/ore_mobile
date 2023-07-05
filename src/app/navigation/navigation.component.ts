@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AccountService } from '../services/account.service';
 import { Router } from '@angular/router';
+import { AdminToolService } from '../services/admin-tool.service';
 
 @Component({
 	selector: 'app-navigation',
@@ -12,7 +13,8 @@ export class NavigationComponent implements OnInit {
 
 	constructor(
 		private accountService: AccountService,
-		private router: Router
+		private router: Router,
+		private adminToolService: AdminToolService
 	) {}
 
 	ngOnInit() {
@@ -24,5 +26,9 @@ export class NavigationComponent implements OnInit {
 	logout() {
 		this.accountService.logout();
 		this.router.navigate(['/web/login']);
+	}
+
+	clearLocalStorage() {
+		this.adminToolService.clearLocalStorage();
 	}
 }

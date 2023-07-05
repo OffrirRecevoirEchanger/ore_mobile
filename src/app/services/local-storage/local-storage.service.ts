@@ -8,6 +8,6 @@ import { Observable } from 'rxjs';
 export abstract class LocalStorageService {
 	abstract get(key: string): Observable<any>;
 	abstract set(key: string, value: any): void;
-	abstract remove(key: string): Observable<any>;
-	abstract clear(): void;
+	abstract remove(key: string): Observable<boolean>;
+	abstract clear(): Observable<boolean>;
 }

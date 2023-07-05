@@ -14,12 +14,13 @@ export class LocalStorageWebService extends LocalStorageService {
 		localStorage.setItem(key, value);
 	}
 
-	remove(key: string): Observable<any> {
+	remove(key: string): Observable<boolean> {
 		localStorage.removeItem(key);
 		return of(true);
 	}
 
-	clear(): void {
+	clear(): Observable<boolean> {
 		localStorage.clear();
+		return of(true);
 	}
 }

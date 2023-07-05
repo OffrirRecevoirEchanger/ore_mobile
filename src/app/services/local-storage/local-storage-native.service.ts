@@ -22,8 +22,8 @@ export class LocalStorageNativeService extends LocalStorageService {
 		SecureStoragePlugin.set({ key, value });
 	}
 
-	remove(key: string): Observable<any> {
-		const subject = new Subject<any>();
+	remove(key: string): Observable<boolean> {
+		const subject = new Subject<boolean>();
 
 		from(SecureStoragePlugin.remove({ key })).subscribe(
 			(storageResponse) => {
@@ -35,7 +35,14 @@ export class LocalStorageNativeService extends LocalStorageService {
 		return subject.asObservable();
 	}
 
-	clear(): void {
-		SecureStoragePlugin.clear();
+	clear(): Observable<boolean> {
+		const subject = new Subject<boolean>();
+
+		from(SecureStoragePlugin.clear()).subscribe((storageResponse) => {
+			subject.next(storageResponse.value);
+			subject.complete();
+		});
+
+		return subject.asObservable();
 	}
 }
