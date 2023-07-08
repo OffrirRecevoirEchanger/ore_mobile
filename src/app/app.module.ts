@@ -18,6 +18,8 @@ import { OreMembreService } from './services/model/ore-membre.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ErrorHandlerService } from './services/error-handler.service';
 import { ErrorAlertComponent } from './error-alert/error-alert.component';
+import { AdminToolService } from './services/admin-tool.service';
+import { ChatService } from './services/chat.service';
 
 @NgModule({
 	declarations: [
@@ -38,6 +40,8 @@ import { ErrorAlertComponent } from './error-alert/error-alert.component';
 		ApiAuthenticationService,
 		AccountService,
 		OreMembreService,
+		AdminToolService,
+		ChatService,
 		{
 			provide: LocalStorageService,
 			useFactory: localStorageServiceFactory,

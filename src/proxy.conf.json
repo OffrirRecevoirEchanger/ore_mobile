@@ -4,5 +4,11 @@
 		"secure": false,
 		"logLevel": "debug",
 		"changeOrigin": true
+	},
+	"/longpolling/*": {
+		"target": "http://10.0.0.45:8069",
+		"secure": false,
+		"logLevel": "debug",
+		"changeOrigin": true
 	}
 }
