@@ -2,6 +2,7 @@ import { Injectable, NgZone } from '@angular/core';
 import { HttpRequestService } from './http-request/http-request.service';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { ErrorHandlerService } from './error-handler.service';
+import { env } from 'src/environment/environment';
 
 @Injectable({
 	providedIn: 'root',
@@ -22,7 +23,7 @@ export class ChatService {
 		this.errorHandlerService.longPollingError$.subscribe(
 			(_errorMessage) => {
 				this._isLongPollingConnected.next(false);
-				setTimeout(() => this.poll(), 5150);
+				setTimeout(() => this.poll(), env.longPollingDelayError);
 			}
 		);
 		this.poll();
@@ -49,7 +50,7 @@ export class ChatService {
 					if (result.length > 0) {
 						this.last = result[result.length - 1].id;
 					}
-					setTimeout(() => this.poll(), 1000);
+					setTimeout(() => this.poll(), env.longPollingDelay);
 				});
 		});
 	}
