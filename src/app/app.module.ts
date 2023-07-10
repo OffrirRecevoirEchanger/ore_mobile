@@ -20,6 +20,7 @@ import { ErrorHandlerService } from './services/error-handler.service';
 import { ErrorAlertComponent } from './error-alert/error-alert.component';
 import { AdminToolService } from './services/admin-tool.service';
 import { ChatService } from './services/chat.service';
+import { ConnectionIndicatorComponent } from './connection-indicator/connection-indicator.component';
 
 @NgModule({
 	declarations: [
@@ -28,6 +29,7 @@ import { ChatService } from './services/chat.service';
 		LoginComponent,
 		NavigationComponent,
 		ErrorAlertComponent,
+  ConnectionIndicatorComponent,
 	],
 	imports: [
 		BrowserModule,

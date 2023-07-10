@@ -6,9 +6,14 @@ import { Observable, Subject } from 'rxjs';
 })
 export class ErrorHandlerService implements ErrorHandler {
 	private _error = new Subject<any>();
+	private _longPollingError = new Subject<any>();
 
 	get error$(): Observable<any> {
 		return this._error.asObservable();
+	}
+
+	get longPollingError$(): Observable<any> {
+		return this._longPollingError.asObservable();
 	}
 
 	handleError(error: any): void {
@@ -23,6 +28,7 @@ export class ErrorHandlerService implements ErrorHandler {
 			error.url.includes('/longpolling/poll')
 		) {
 			response = error.message || error.error;
+			this._longPollingError.next(response);
 		} else if (error.error === true && error.data?.message) {
 			response = error.data.message;
 		} else if (error.error?.message) {

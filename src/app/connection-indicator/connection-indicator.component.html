@@ -1,0 +1,9 @@
+<div
+	class="longpolling-connection-indicator border border-secondary bg-dark rounded text-light d-flex align-items-center p-2"
+>
+	Long polling
+	<div
+		class="longpolling-connection-indicator__badge rounded-pill"
+		[ngClass]="{ 'bg-danger': !connected, 'bg-success': connected }"
+	></div>
+</div>
