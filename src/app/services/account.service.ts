@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import { ReplaySubject, Subject, mergeMap } from 'rxjs';
 import { ApiAuthenticationService } from './api-authentication.service';
 import { OreMembreService } from './model/ore-membre.service';
+import { OreMembre } from '../models/ore-membre';
 
 @Injectable({
 	providedIn: 'root',
 })
 export class AccountService {
-	private _user: any;
-	private _userSubject = new ReplaySubject<any>();
+	private _user: OreMembre | null = null;
+	private _userSubject = new ReplaySubject<OreMembre | null>();
 	private _isDoneFetchingLocalUser = new ReplaySubject<boolean>();
 
 	get user$() {
@@ -19,7 +20,7 @@ export class AccountService {
 		return this._isDoneFetchingLocalUser.asObservable();
 	}
 
-	set user(user: any) {
+	set user(user: OreMembre | null) {
 		this._user = user;
 		this._userSubject.next(user);
 	}
@@ -37,7 +38,7 @@ export class AccountService {
 	}
 
 	login(username: string, password: string) {
-		const subject = new Subject<any>();
+		const subject = new Subject<OreMembre | null>();
 		this.apiAuthenticationService
 			.authenticate(username, password)
 			.pipe(
@@ -45,7 +46,7 @@ export class AccountService {
 					return this.oreMembreService.get();
 				})
 			)
-			.subscribe((response) => {
+			.subscribe((response: OreMembre | null) => {
 				subject.next(response);
 				subject.complete();
 			});

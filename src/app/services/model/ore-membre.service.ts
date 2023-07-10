@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpRequestService } from '../http-request/http-request.service';
 import { ApiAuthenticationService } from '../api-authentication.service';
 import { Observable, ReplaySubject, concatMap } from 'rxjs';
+import { OreMembre } from 'src/app/models/ore-membre';
 
 @Injectable({
 	providedIn: 'root',
@@ -14,8 +15,8 @@ export class OreMembreService {
 		private apiAuthenticationService: ApiAuthenticationService
 	) {}
 
-	get(): Observable<any> {
-		const subject = new ReplaySubject<any>();
+	get(): Observable<OreMembre | null> {
+		const subject = new ReplaySubject<OreMembre | null>();
 
 		this.apiAuthenticationService
 			.getAuthData()
@@ -32,7 +33,7 @@ export class OreMembreService {
 							`/api/${this.modelName}`,
 							{
 								domain,
-								fields: 'image,name,partner_id',
+								fields: 'partner_id,name,image',
 							},
 							{
 								access_token: authData.accessToken,
@@ -43,7 +44,17 @@ export class OreMembreService {
 				})
 			)
 			.subscribe((value) => {
-				subject.next(value ? value?.data[0] : null);
+				if (value && value?.data[0]) {
+					const data = value.data[0];
+					const oreMembre = new OreMembre(
+						data.id,
+						data.partner_id,
+						data.name,
+						data.image
+					);
+					subject.next(oreMembre);
+				}
+				subject.next(null);
 				subject.complete();
 			});
 
