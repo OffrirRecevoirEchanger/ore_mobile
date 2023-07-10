@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AccountService } from '../services/account.service';
 import { Router } from '@angular/router';
 import { AdminToolService } from '../services/admin-tool.service';
+import { env } from 'src/environment/environment';
 
 @Component({
 	selector: 'app-navigation',
@@ -10,6 +11,10 @@ import { AdminToolService } from '../services/admin-tool.service';
 })
 export class NavigationComponent implements OnInit {
 	user: any;
+
+	get isProduction(): boolean {
+		return env.production;
+	}
 
 	constructor(
 		private accountService: AccountService,
