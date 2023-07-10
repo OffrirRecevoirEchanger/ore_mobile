@@ -20,11 +20,11 @@ export class LoginComponent {
 		password: new FormControl('', [Validators.required]),
 	});
 
-	get usernameControl() {
+	get usernameControl(): any {
 		return this.loginFormGroup.get('username');
 	}
 
-	get passwordControl() {
+	get passwordControl(): any {
 		return this.loginFormGroup.get('password');
 	}
 
@@ -33,7 +33,7 @@ export class LoginComponent {
 		private router: Router
 	) {}
 
-	login() {
+	login(): void {
 		if (this.loginFormGroup.invalid) {
 			this.loginFormGroup.markAllAsTouched();
 			return;
@@ -50,7 +50,7 @@ export class LoginComponent {
 			});
 	}
 
-	isInvalid(control: AbstractControl) {
+	isInvalid(control: AbstractControl): boolean | null {
 		return control.errors && (control.touched || control.dirty);
 	}
 }

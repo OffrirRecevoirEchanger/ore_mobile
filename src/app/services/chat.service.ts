@@ -29,7 +29,7 @@ export class ChatService {
 		this.poll();
 	}
 
-	poll() {
+	poll(): void {
 		const data = {
 			jsonrpc: '2.0',
 			method: 'call',

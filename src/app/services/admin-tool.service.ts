@@ -13,7 +13,7 @@ export class AdminToolService {
 		private router: Router
 	) {}
 
-	clearLocalStorage() {
+	clearLocalStorage(): void {
 		this.localStorageService.clear().subscribe((response) => {
 			if (!response) {
 				return;

@@ -28,12 +28,12 @@ export class NavigationComponent implements OnInit {
 		});
 	}
 
-	logout() {
+	logout(): void {
 		this.accountService.logout();
 		this.router.navigate(['/web/login']);
 	}
 
-	clearLocalStorage() {
+	clearLocalStorage(): void {
 		this.adminToolService.clearLocalStorage();
 	}
 }
