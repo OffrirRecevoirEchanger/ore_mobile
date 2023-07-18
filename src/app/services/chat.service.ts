@@ -1,8 +1,10 @@
 import { Injectable, NgZone } from '@angular/core';
 import { HttpRequestService } from './http-request/http-request.service';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { ErrorHandlerService } from './error-handler.service';
 import { env } from 'src/environment/environment';
+import { OreChatMessage } from '../models/ore-chat-message';
+import { OreChatGroup } from '../models/ore-chat-group';
 
 @Injectable({
 	providedIn: 'root',
@@ -53,5 +55,58 @@ export class ChatService {
 					setTimeout(() => this.poll(), env.longPollingDelay);
 				});
 		});
+	}
+
+	getPersonalChatInformation(): Observable<OreChatGroup[]> {
+		const subject = new Subject<OreChatGroup[]>();
+
+		const data = {
+			jsonrpc: '2.0',
+			method: 'call',
+			params: {},
+		};
+		const headers = {
+			'Content-Type': 'application/json',
+		};
+
+		this.httpRequestService
+			.post('/ore/get_personal_chat_information', data, headers)
+			.subscribe((result) => {
+				const messageGroupsRaw = result.result.lst_membre_message;
+				const messageGroups = this.parseMessageGroups(messageGroupsRaw);
+				console.log(messageGroups);
+			});
+
+		return subject.asObservable();
+	}
+
+	parseMessageGroups(messageGroupsRaw: any): OreChatGroup[] {
+		const groups: OreChatGroup[] = [];
+
+		for (const group of messageGroupsRaw) {
+			const messages: OreChatMessage[] = [];
+			for (const message of group.lst_msg) {
+				messages.push(
+					new OreChatMessage(
+						message.id,
+						message.is_read,
+						message.m_id,
+						message.name
+					)
+				);
+			}
+			groups.push(
+				new OreChatGroup(
+					group.id,
+					group.id_group,
+					messages,
+					group.ma_photo,
+					group.name,
+					group.resume_msg
+				)
+			);
+		}
+
+		return groups;
 	}
 }
