@@ -1,4 +1,4 @@
-$chatMenuBackground: #eee;
+$chatMenuBackground: #f3f3f3;
 
 .chat-menu {
 	background-color: $chatMenuBackground;
@@ -22,7 +22,7 @@ $chatMenuBackground: #eee;
 	display: flex;
 	padding: 0.5rem 1rem 0.5rem 0.5rem;
 	&:hover {
-		background-color: darken($chatMenuBackground, 5%);
+		background-color: darken($chatMenuBackground, 3%);
 	}
 }
 
