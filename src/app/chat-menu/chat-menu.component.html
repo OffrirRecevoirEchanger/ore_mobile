@@ -1,0 +1,14 @@
+<div class="chat-menu">
+	<div
+		*ngFor="let oreChatGroup of personalChatInformation"
+		class="chat-group"
+		role="button"
+	>
+		<img
+			[src]="oreChatGroup.image"
+			[alt]="oreChatGroup.name"
+			class="chat-group__image"
+		/>
+		<p class="chat-group__name">{{ oreChatGroup.name }}</p>
+	</div>
+</div>

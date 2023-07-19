@@ -33,6 +33,8 @@ export class ErrorHandlerService implements ErrorHandler {
 			response = error.data.message;
 		} else if (error.error?.message) {
 			response = error.error.message;
+		} else if (error.message) {
+			response = error.message;
 		}
 
 		if (!response) {

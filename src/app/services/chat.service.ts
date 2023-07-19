@@ -57,7 +57,7 @@ export class ChatService {
 		});
 	}
 
-	getPersonalChatInformation(): Observable<OreChatGroup[]> {
+	fetchPersonalChatInformation(): Observable<OreChatGroup[]> {
 		const subject = new Subject<OreChatGroup[]>();
 
 		const data = {
@@ -72,9 +72,15 @@ export class ChatService {
 		this.httpRequestService
 			.post('/ore/get_personal_chat_information', data, headers)
 			.subscribe((result) => {
-				const messageGroupsRaw = result.result.lst_membre_message;
-				const messageGroups = this.parseMessageGroups(messageGroupsRaw);
-				console.log(messageGroups);
+				if (result.error?.message) {
+					throw new Error(result.error.message);
+				} else {
+					const messageGroupsRaw = result?.result?.lst_membre_message;
+					const messageGroups =
+						this.parseMessageGroups(messageGroupsRaw);
+					subject.next(messageGroups);
+					subject.complete();
+				}
 			});
 
 		return subject.asObservable();
