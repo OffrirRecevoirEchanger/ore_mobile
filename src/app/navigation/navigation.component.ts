@@ -1,4 +1,10 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import {
+	Component,
+	ElementRef,
+	OnDestroy,
+	OnInit,
+	ViewChild,
+} from '@angular/core';
 import { AccountService } from '../services/account.service';
 import { Router } from '@angular/router';
 import { AdminToolService } from '../services/admin-tool.service';
@@ -11,6 +17,7 @@ import { Subscription } from 'rxjs';
 	styleUrls: ['./navigation.component.scss'],
 })
 export class NavigationComponent implements OnInit, OnDestroy {
+	@ViewChild('navbar') navbar!: ElementRef;
 	private _userSubscription!: Subscription;
 	user: any;
 
