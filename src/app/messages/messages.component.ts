@@ -108,7 +108,6 @@ export class MessagesComponent implements OnInit, AfterViewInit, OnDestroy {
 							newMessageForCurrentUser.message.data
 						)
 						.subscribe((_message) => {
-							console.log('SCROLL TO BOTTOM');
 							setTimeout(() => {
 								this.scrollToBottom(
 									this.messageList.toArray()[0].nativeElement
