@@ -1,0 +1,91 @@
+<app-navigation></app-navigation>
+<main id="main" #main>
+	<div class="messages__top-bar" #messagesTopBar>
+		<h2 class="messages__heading">Messages</h2>
+		<a
+			routerLink="/messages"
+			class="messages__back"
+			*ngIf="isChatGroupSelected"
+			>Retour</a
+		>
+	</div>
+	<div class="messaging-interface">
+		<div class="chat-groups" *ngIf="!isChatGroupSelected">
+			<a
+				class="chat-group"
+				*ngFor="let oreChatGroup of personalChatInformation"
+				role="button"
+				[ngClass]="{
+					'chat-group--active': isActiveChatGroup(
+						oreChatGroup.groupId
+					)
+				}"
+				routerLink="/messages"
+				[queryParams]="{ group: oreChatGroup.groupId }"
+			>
+				<img
+					[src]="oreChatGroup.image"
+					[alt]="oreChatGroup.name"
+					class="chat-group__image"
+				/>
+				<p class="chat-group__name">{{ oreChatGroup.name }}</p>
+			</a>
+		</div>
+
+		<div class="messages" *ngIf="isChatGroupSelected">
+			<ul class="message-list" #messageList>
+				<li
+					class="message"
+					*ngFor="let message of activeChatGroup.messages"
+					[ngClass]="{
+						'message--from-other': message.memberId !== user.id
+					}"
+				>
+					<div
+						*ngIf="message.memberId !== user.id"
+						class="message__content"
+					>
+						<img
+							[src]="activeChatGroup.image"
+							[alt]="activeChatGroup.name"
+							class="message__image"
+						/>
+						<p class="message__text">{{ message.text }}</p>
+					</div>
+					<div
+						*ngIf="message.memberId === user.id"
+						class="message__content"
+					>
+						<img
+							[src]="profilePicture"
+							[alt]="user.partnerId"
+							class="message__image"
+						/>
+						<p class="message__text">{{ message.text }}</p>
+					</div>
+				</li>
+			</ul>
+			<div class="text-bar__wrapper" #textBarWrapper>
+				<form
+					[formGroup]="messageFormGroup"
+					class="text-bar"
+					(submit)="onMessageSubmit()"
+				>
+					<div class="text-bar__image" role="button">📷</div>
+					<input
+						type="text"
+						formControlName="message"
+						class="text-bar__input"
+						placeholder="Écrire un message"
+					/>
+					<input
+						type="submit"
+						class="text-bar__submit"
+						value="✈️"
+						role="button"
+					/>
+				</form>
+			</div>
+		</div>
+	</div>
+</main>

@@ -22,6 +22,7 @@ import { AdminToolService } from './services/admin-tool.service';
 import { ChatService } from './services/chat.service';
 import { ConnectionIndicatorComponent } from './connection-indicator/connection-indicator.component';
 import { ChatMenuComponent } from './chat-menu/chat-menu.component';
+import { MessagesComponent } from './messages/messages.component';
 
 @NgModule({
 	declarations: [
@@ -32,6 +33,8 @@ import { ChatMenuComponent } from './chat-menu/chat-menu.component';
 		ErrorAlertComponent,
   ConnectionIndicatorComponent,
   ChatMenuComponent,
+		ConnectionIndicatorComponent,
+		MessagesComponent,
 	],
 	imports: [
 		BrowserModule,
