@@ -1,3 +1,41 @@
+:host {
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+}
+
 #main {
+	flex: 1;
 	margin-top: 4.6875rem;
+}
+
+.reflet-top {
+	border: 1px solid red;
+	padding: 0.5rem 1rem;
+}
+
+.reflet-options {
+	align-items: center;
+	border: 1px solid green;
+	display: flex;
+	justify-content: space-between;
+	margin: auto;
+	max-width: 48rem;
+	padding: 0 1rem;
+	&__item {
+		height: min(70px, calc((100vw - 2rem) / 6));
+		max-width: min(70px, calc((100vw - 2rem) / 6));
+		width: 100%;
+		&:nth-child(even) {
+			background-color: lightblue;
+		}
+		&:nth-child(odd) {
+			background-color: lightgreen;
+		}
+	}
+}
+
+.reflet-content {
+	border: 1px solid dodgerblue;
+	height: 100%;
 }
