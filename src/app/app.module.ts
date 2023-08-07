@@ -22,6 +22,7 @@ import { AdminToolService } from './services/admin-tool.service';
 import { ChatService } from './services/chat.service';
 import { ConnectionIndicatorComponent } from './connection-indicator/connection-indicator.component';
 import { MessagesComponent } from './messages/messages.component';
+import { RefletComponent } from './reflet/reflet.component';
 
 @NgModule({
 	declarations: [
@@ -32,6 +33,7 @@ import { MessagesComponent } from './messages/messages.component';
 		ErrorAlertComponent,
 		ConnectionIndicatorComponent,
 		MessagesComponent,
+  RefletComponent,
 	],
 	imports: [
 		BrowserModule,
