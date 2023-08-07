@@ -16,6 +16,7 @@ import { ActivatedRoute } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { OreMembre } from '../models/ore-membre';
 import { NavigationComponent } from '../navigation/navigation.component';
+import { OreChatMessage } from '../models/ore-chat-message';
 
 @Component({
 	selector: 'app-messages',
@@ -94,28 +95,6 @@ export class MessagesComponent implements OnInit, AfterViewInit, OnDestroy {
 					this._activeChatGroupId = activeChatGroupId;
 				}
 			);
-			this.chatService.newMessagesFromLongPolling$.subscribe(
-				(newMessages: any[]) => {
-					let newMessageForCurrentUser: any = null;
-					for (const message of newMessages) {
-						if (message.message.data.membre_id === this.user.id) {
-							newMessageForCurrentUser = message;
-							break;
-						}
-					}
-					this.chatService
-						.addMessageToPersonalChatInformation(
-							newMessageForCurrentUser.message.data
-						)
-						.subscribe((_message) => {
-							setTimeout(() => {
-								this.scrollToBottom(
-									this.messageList.toArray()[0].nativeElement
-								);
-							}, 1000);
-						});
-				}
-			);
 		});
 	}
 
@@ -130,6 +109,16 @@ export class MessagesComponent implements OnInit, AfterViewInit, OnDestroy {
 				message: '',
 			});
 		});
+		this.chatService.newMessagesFromLongPolling$.subscribe(
+			(_newMessages: OreChatMessage[]) => {
+				setTimeout(() => {
+					const messageList = this.messageList.toArray()[0];
+					if (messageList) {
+						this.scrollToBottom(messageList.nativeElement);
+					}
+				}, 1000);
+			}
+		);
 	}
 
 	isActiveChatGroup(chatGroupId: number): boolean {
