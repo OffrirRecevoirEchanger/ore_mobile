@@ -11,7 +11,12 @@
 
 .reflet-top {
 	border: 1px solid red;
-	padding: 0.5rem 1rem;
+	padding: 0;
+	&__text {
+		max-width: 48rem;
+		margin: 0 auto;
+		padding: 0.5rem 1rem;
+	}
 }
 
 .reflet-options {
@@ -24,16 +29,22 @@
 	padding: 0 1rem;
 	&__item {
 		align-items: center;
+		background-color: #f3f3f3;
+		border-radius: 0.25rem;
 		display: flex;
-		height: min(70px, calc((100vw - 2rem) / 6));
+		gap: 0.5rem;
+		height: min(70px, calc((100vw - 4rem) / 5));
 		justify-content: center;
-		max-width: min(70px, calc((100vw - 2rem) / 6));
+		max-width: min(70px, calc((100vw - 4rem) / 5));
 		width: 100%;
-		&:nth-child(even) {
-			background-color: lightblue;
+		&:hover {
+			background-color: darken(#f3f3f3, 3);
 		}
-		&:nth-child(odd) {
-			background-color: lightgreen;
+		&[data-disabled="disabled"] {
+			background-color: #ddd;
+			&:hover {
+				background-color: darken(#ddd, 3);
+			}
 		}
 	}
 }
