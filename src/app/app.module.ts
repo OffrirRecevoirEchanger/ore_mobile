@@ -24,6 +24,15 @@ import { ConnectionIndicatorComponent } from './connection-indicator/connection-
 import { MessagesComponent } from './messages/messages.component';
 import { RefletComponent } from './reflet/reflet.component';
 import { RefletContactsComponent } from './reflet/reflet-contacts/reflet-contacts.component';
+import {
+	LucideAngularModule,
+	Users,
+	MessagesSquare,
+	Eye,
+	Smile,
+	ListTodo,
+	Split,
+} from 'lucide-angular';
 
 @NgModule({
 	declarations: [
@@ -43,6 +52,14 @@ import { RefletContactsComponent } from './reflet/reflet-contacts/reflet-contact
 		NgbModule,
 		HttpClientModule,
 		ReactiveFormsModule,
+		LucideAngularModule.pick({
+			Users,
+			MessagesSquare,
+			Eye,
+			Smile,
+			ListTodo,
+			Split,
+		}),
 	],
 	providers: [
 		ApiAuthenticationService,

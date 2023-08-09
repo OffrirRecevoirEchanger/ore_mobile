@@ -9,3 +9,9 @@ body {
 	height: 100%;
 	overflow-y: auto;
 }
+
+svg.reflet-options__icon {
+	height: min(calc(((100vw - 2rem) / 6) * 0.45), 2rem);
+	width: min(calc(((100vw - 2rem) / 6) * 0.45), 2rem);
+	display: block;
+}

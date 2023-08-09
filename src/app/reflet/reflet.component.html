@@ -4,12 +4,41 @@
 		<h2 class="reflet-top__text m-0">Reflet</h2>
 	</div>
 	<div class="reflet-options" #refletOptions>
-		<div class="reflet-options__item" role="button"></div>
-		<div class="reflet-options__item" role="button"></div>
-		<div class="reflet-options__item" role="button"></div>
-		<div class="reflet-options__item" role="button"></div>
-		<div class="reflet-options__item" role="button"></div>
-		<div class="reflet-options__item" role="button"></div>
+		<div class="reflet-options__item" role="button">
+			<lucide-icon
+				name="users"
+				class="reflet-options__icon"
+			></lucide-icon>
+		</div>
+		<div class="reflet-options__item" role="button">
+			<lucide-icon
+				name="messages-square"
+				class="reflet-options__icon"
+			></lucide-icon>
+		</div>
+		<div class="reflet-options__item" role="button">
+			<lucide-icon name="eye" class="reflet-options__icon"></lucide-icon>
+		</div>
+		<div class="reflet-options__item" role="button">
+			<lucide-icon
+				name="smile"
+				class="reflet-options__icon"
+			></lucide-icon>
+		</div>
+		<div class="reflet-options__item" role="button">
+			<lucide-icon
+				name="list-todo"
+				class="reflet-options__icon"
+			></lucide-icon>
+		</div>
+		<div class="reflet-options__item" role="button">
+			<lucide-icon
+				name="split"
+				class="reflet-options__icon"
+			></lucide-icon>
+		</div>
 	</div>
-	<div class="reflet-content" #refletContent></div>
+	<div class="reflet-content" #refletContent>
+		<router-outlet></router-outlet>
+	</div>
 </main>

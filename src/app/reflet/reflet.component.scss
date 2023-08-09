@@ -23,7 +23,10 @@
 	max-width: 48rem;
 	padding: 0 1rem;
 	&__item {
+		align-items: center;
+		display: flex;
 		height: min(70px, calc((100vw - 2rem) / 6));
+		justify-content: center;
 		max-width: min(70px, calc((100vw - 2rem) / 6));
 		width: 100%;
 		&:nth-child(even) {
