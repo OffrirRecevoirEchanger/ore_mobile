@@ -40,7 +40,7 @@ export class NavigationComponent implements OnInit, OnDestroy {
 	}
 
 	ngOnDestroy() {
-		this._userSubscription.unsubscribe();
+		this._userSubscription?.unsubscribe();
 	}
 
 	logout(): void {

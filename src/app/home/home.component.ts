@@ -30,6 +30,6 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
 	}
 
 	ngOnDestroy() {
-		this._userSubscription.unsubscribe();
+		this._userSubscription?.unsubscribe();
 	}
 }

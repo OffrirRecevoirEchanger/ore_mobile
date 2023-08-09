@@ -31,8 +31,13 @@ export class MessagesComponent implements OnInit, AfterViewInit, OnDestroy {
 	messageList!: QueryList<ElementRef>;
 	@ViewChildren(NavigationComponent)
 	navComponentQueryList!: QueryList<NavigationComponent>;
+
+	private _pciSubscription!: Subscription;
+	private _queryParamMapSubscription!: Subscription;
 	private _userSubscription!: Subscription;
+
 	private _activeChatGroupId!: number;
+
 	user!: OreMembre;
 	personalChatInformation: OreChatGroup[] = [];
 	messageFormGroup = new FormGroup({
@@ -82,14 +87,18 @@ export class MessagesComponent implements OnInit, AfterViewInit, OnDestroy {
 			}
 			this.user = user;
 			this.chatService.fetchPersonalChatInformation();
-			this.chatService.personalChatInformation$.subscribe(
-				(personalChatInformation: OreChatGroup[]) => {
-					this.personalChatInformation = personalChatInformation;
-					this.route.queryParamMap.subscribe((map) => {
-						this._activeChatGroupId = Number(map.get('group'));
-					});
-				}
-			);
+			this._pciSubscription =
+				this.chatService.personalChatInformation$.subscribe(
+					(personalChatInformation: OreChatGroup[]) => {
+						this.personalChatInformation = personalChatInformation;
+						this._queryParamMapSubscription =
+							this.route.queryParamMap.subscribe((map) => {
+								this._activeChatGroupId = Number(
+									map.get('group')
+								);
+							});
+					}
+				);
 			this.chatService.activeChatGroupId$.subscribe(
 				(activeChatGroupId) => {
 					this._activeChatGroupId = activeChatGroupId;
@@ -155,6 +164,8 @@ export class MessagesComponent implements OnInit, AfterViewInit, OnDestroy {
 	}
 
 	ngOnDestroy() {
-		this._userSubscription.unsubscribe();
+		this._pciSubscription?.unsubscribe();
+		this._queryParamMapSubscription?.unsubscribe();
+		this._userSubscription?.unsubscribe();
 	}
 }
