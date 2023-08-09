@@ -1,0 +1,19 @@
+<div class="reflet-contacts">
+	<a
+		class="chat-group"
+		*ngFor="let oreChatGroup of personalChatInformation"
+		role="button"
+		[ngClass]="{
+			'chat-group--active': isActiveChatGroup(oreChatGroup.groupId)
+		}"
+		routerLink="/messages"
+		[queryParams]="{ group: oreChatGroup.groupId }"
+	>
+		<img
+			[src]="oreChatGroup.image"
+			[alt]="oreChatGroup.name"
+			class="chat-group__image"
+		/>
+		<p class="chat-group__name">{{ oreChatGroup.name }}</p>
+	</a>
+</div>

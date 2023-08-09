@@ -1,0 +1,40 @@
+.reflet-contacts {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+	margin: auto;
+	max-width: 48rem;
+	padding: 1rem;
+}
+
+.chat-group {
+	align-items: center;
+	background-color: #fafafa;
+	border-radius: 0.25rem;
+	color: #000;
+	gap: 0.5rem;
+	display: flex;
+	padding: 0.5rem 1rem 0.5rem 0.5rem;
+	text-decoration: none;
+	transition: background-color 150ms ease-in-out;
+	&:hover {
+		background-color: darken(#fafafa, 3%);
+	}
+	&--active {
+		background-color: lightblue;
+		&:hover {
+			background-color: darken(lightblue, 3%);
+		}
+	}
+	&__image {
+		border-radius: 50%;
+		box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+		height: 3rem;
+		object-fit: cover;
+		object-position: center;
+		width: 3rem;
+	}
+	&__name {
+		margin: 0;
+	}
+}

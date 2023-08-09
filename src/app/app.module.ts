@@ -23,6 +23,7 @@ import { ChatService } from './services/chat.service';
 import { ConnectionIndicatorComponent } from './connection-indicator/connection-indicator.component';
 import { MessagesComponent } from './messages/messages.component';
 import { RefletComponent } from './reflet/reflet.component';
+import { RefletContactsComponent } from './reflet/reflet-contacts/reflet-contacts.component';
 
 @NgModule({
 	declarations: [
@@ -33,7 +34,8 @@ import { RefletComponent } from './reflet/reflet.component';
 		ErrorAlertComponent,
 		ConnectionIndicatorComponent,
 		MessagesComponent,
-  RefletComponent,
+		RefletComponent,
+		RefletContactsComponent,
 	],
 	imports: [
 		BrowserModule,
