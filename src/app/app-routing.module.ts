@@ -5,6 +5,10 @@ import { LoginComponent } from './login/login.component';
 import { MessagesComponent } from './messages/messages.component';
 import { RefletComponent } from './reflet/reflet.component';
 import { RefletContactsComponent } from './reflet/reflet-contacts/reflet-contacts.component';
+import { RefletObservationComponent } from './reflet/reflet-observation/reflet-observation.component';
+import { RefletSentimentsComponent } from './reflet/reflet-sentiments/reflet-sentiments.component';
+import { RefletBesoinComponent } from './reflet/reflet-besoin/reflet-besoin.component';
+import { RefletDemandeActionComponent } from './reflet/reflet-demande-action/reflet-demande-action.component';
 
 const routes: Routes = [
 	{ path: '', component: HomeComponent },
@@ -17,6 +21,22 @@ const routes: Routes = [
 			{
 				path: '',
 				component: RefletContactsComponent,
+			},
+			{
+				path: 'observation',
+				component: RefletObservationComponent,
+			},
+			{
+				path: 'sentiments',
+				component: RefletSentimentsComponent,
+			},
+			{
+				path: 'besoin',
+				component: RefletBesoinComponent,
+			},
+			{
+				path: 'demande_action',
+				component: RefletDemandeActionComponent,
 			},
 		],
 	},

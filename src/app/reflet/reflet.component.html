@@ -4,33 +4,66 @@
 		<h2 class="reflet-top__text">Reflet</h2>
 	</div>
 	<div class="reflet-options" #refletOptions>
-		<div class="reflet-options__item" role="button">
+		<a
+			routerLink="/reflet"
+			class="reflet-options__item"
+			ngbPopover="Réseau"
+			triggers="mouseenter:mouseleave"
+			placement="bottom-start"
+		>
 			<lucide-icon
 				name="users"
 				class="reflet-options__icon"
 			></lucide-icon>
-		</div>
-		<div class="reflet-options__item" role="button">
+		</a>
+		<a
+			routerLink="/reflet/observation"
+			class="reflet-options__item"
+			ngbPopover="Observation"
+			triggers="mouseenter:mouseleave"
+			placement="bottom"
+		>
 			<lucide-icon name="eye" class="reflet-options__icon"></lucide-icon>
-		</div>
-		<div class="reflet-options__item" role="button">
+		</a>
+		<a
+			routerLink="/reflet/sentiments"
+			class="reflet-options__item"
+			role="button"
+			ngbPopover="Sentiments"
+			triggers="mouseenter:mouseleave"
+			placement="bottom"
+		>
 			<lucide-icon
 				name="smile"
 				class="reflet-options__icon"
 			></lucide-icon>
-		</div>
-		<div class="reflet-options__item" role="button">
+		</a>
+		<a
+			routerLink="/reflet/besoin"
+			class="reflet-options__item"
+			role="button"
+			ngbPopover="Besoin"
+			triggers="mouseenter:mouseleave"
+			placement="bottom"
+		>
 			<lucide-icon
 				name="list-todo"
 				class="reflet-options__icon"
 			></lucide-icon>
-		</div>
-		<div class="reflet-options__item" role="button">
+		</a>
+		<a
+			routerLink="/reflet/demande_action"
+			class="reflet-options__item"
+			role="button"
+			ngbPopover="Demande d'action"
+			triggers="mouseenter:mouseleave"
+			placement="bottom-end"
+		>
 			<lucide-icon
 				name="split"
 				class="reflet-options__icon"
 			></lucide-icon>
-		</div>
+		</a>
 	</div>
 	<div class="reflet-content" #refletContent>
 		<router-outlet></router-outlet>

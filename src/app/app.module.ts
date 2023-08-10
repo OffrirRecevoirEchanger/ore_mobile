@@ -33,6 +33,10 @@ import {
 	ListTodo,
 	Split,
 } from 'lucide-angular';
+import { RefletObservationComponent } from './reflet/reflet-observation/reflet-observation.component';
+import { RefletSentimentsComponent } from './reflet/reflet-sentiments/reflet-sentiments.component';
+import { RefletBesoinComponent } from './reflet/reflet-besoin/reflet-besoin.component';
+import { RefletDemandeActionComponent } from './reflet/reflet-demande-action/reflet-demande-action.component';
 
 @NgModule({
 	declarations: [
@@ -45,6 +49,10 @@ import {
 		MessagesComponent,
 		RefletComponent,
 		RefletContactsComponent,
+		RefletObservationComponent,
+		RefletSentimentsComponent,
+		RefletBesoinComponent,
+		RefletDemandeActionComponent,
 	],
 	imports: [
 		BrowserModule,
