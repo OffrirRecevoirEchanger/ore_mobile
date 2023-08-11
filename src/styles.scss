@@ -10,8 +10,17 @@ body {
 	overflow-y: auto;
 }
 
+.lucide-icon {
+	display: block;
+}
+
 svg.reflet-options__icon {
 	height: min(calc(((100vw - 4rem) / 5) * 0.45), 2rem);
 	width: min(calc(((100vw - 4rem) / 5) * 0.45), 2rem);
+}
+
+.reflet-interaction__icon {
 	display: block;
+	height: 1.5rem;
+	width: 1.5rem;
 }

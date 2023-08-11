@@ -32,6 +32,7 @@ import {
 	Smile,
 	ListTodo,
 	Split,
+	MoreHorizontal,
 } from 'lucide-angular';
 import { RefletObservationComponent } from './reflet/reflet-observation/reflet-observation.component';
 import { RefletSentimentsComponent } from './reflet/reflet-sentiments/reflet-sentiments.component';
@@ -67,6 +68,7 @@ import { RefletDemandeActionComponent } from './reflet/reflet-demande-action/ref
 			Smile,
 			ListTodo,
 			Split,
+			MoreHorizontal,
 		}),
 	],
 	providers: [

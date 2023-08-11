@@ -1,0 +1,35 @@
+.reflet-interaction__wrapper {
+	position: relative;
+}
+
+.reflet-interaction {
+	$bgc: #f3f3f3;
+	align-items: center;
+	background-color: $bgc;
+	border: 1px solid #d6d6d6;
+	border-radius: 0.25rem;
+	display: flex;
+	gap: 1rem;
+	margin: auto;
+	max-width: 24rem;
+	min-height: 4rem;
+	padding: 1rem;
+	position: relative;
+	z-index: 2;
+	&__text {
+		margin: 0;
+	}
+	&__more {
+		$darkerBgc: darken($bgc, 8);
+		background-color: $darkerBgc;
+		border-radius: 0.25rem;
+		bottom: 0.5rem;
+		position: absolute;
+		right: 0.5rem;
+		padding: 0.25rem;
+		transition: background-color 150ms ease-in-out;
+		&:hover {
+			background-color: darken($darkerBgc, 5);
+		}
+	}
+}

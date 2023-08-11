@@ -1,5 +1,6 @@
+@use "../reflet-interaction";
+@use "../reflet-section";
+
 .reflet-demande-action {
-	margin: auto;
-	max-width: 48rem;
-	padding: 1rem;
+	@include reflet-section.refletSectionBase;
 }

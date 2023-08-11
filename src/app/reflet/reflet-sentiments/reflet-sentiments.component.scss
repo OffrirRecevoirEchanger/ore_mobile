@@ -1,9 +1,30 @@
+@use "../reflet-interaction";
 @use "../reflet-section";
 
 .reflet-sentiments {
 	@include reflet-section.refletSectionBase;
 }
+
+.sentiments-form__box {
+	background-color: lighten(#f3f3f3, 2);
+	border: 1px solid #d6d6d6;
+	border-top: none;
+	border-radius: 0 0 0.25rem 0.25rem;
 	margin: auto;
-	max-width: 48rem;
+	width: 20rem;
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
 	padding: 1rem;
+	bottom: 1px;
+	&__wrapper {
+		height: 0;
+		left: 0;
+		overflow: hidden;
+		position: absolute;
+		top: 100%;
+		transition: height 350ms ease-in-out;
+		width: 100%;
+		z-index: 1;
+	}
 }

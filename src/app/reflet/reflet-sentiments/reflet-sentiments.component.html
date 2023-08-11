@@ -1,3 +1,32 @@
 <div class="reflet-sentiments">
-	<p>reflet-sentiments works!</p>
+	<div class="reflet-interaction__wrapper">
+		<div class="reflet-interaction">
+			<lucide-icon
+				name="smile"
+				class="reflet-interaction__icon"
+			></lucide-icon>
+			<p class="reflet-interaction__text">
+				Tu m'as parlé de tes émotions.
+			</p>
+			<div
+				class="reflet-interaction__more"
+				role="button"
+				(click)="toggleMenu()"
+			>
+				<lucide-icon
+					name="more-horizontal"
+					class="lucide-icon"
+				></lucide-icon>
+			</div>
+		</div>
+		<div class="sentiments-form__box__wrapper" #formBoxWrapper>
+			<div class="sentiments-form__box" #formBox>
+				<h3>Sentiments</h3>
+				<p>
+					Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+					Ullam, voluptate! Voluptas iste itaque dicta dolor repellat.
+				</p>
+			</div>
+		</div>
+	</div>
 </div>
