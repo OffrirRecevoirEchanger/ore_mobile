@@ -1,10 +1,10 @@
+@use "../reflet-section";
+
 .reflet-contacts {
+	@include reflet-section.refletSectionBase;
 	display: flex;
 	flex-direction: column;
 	gap: 0.5rem;
-	margin: auto;
-	max-width: 48rem;
-	padding: 1rem;
 }
 
 .chat-group {

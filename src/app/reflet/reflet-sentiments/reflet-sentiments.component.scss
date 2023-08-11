@@ -1,4 +1,8 @@
+@use "../reflet-section";
+
 .reflet-sentiments {
+	@include reflet-section.refletSectionBase;
+}
 	margin: auto;
 	max-width: 48rem;
 	padding: 1rem;
