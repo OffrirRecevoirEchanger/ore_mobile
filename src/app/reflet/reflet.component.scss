@@ -10,18 +10,16 @@
 }
 
 .reflet-top {
-	border: 1px solid red;
 	padding: 0;
 	&__text {
 		max-width: 48rem;
 		margin: 0 auto;
-		padding: 0.5rem 1rem;
+		padding: 1rem;
 	}
 }
 
 .reflet-options {
 	align-items: center;
-	border: 1px solid green;
 	display: flex;
 	justify-content: space-between;
 	margin: auto;
@@ -31,25 +29,20 @@
 		align-items: center;
 		background-color: #f3f3f3;
 		border-radius: 0.25rem;
+		color: #000;
 		display: flex;
 		gap: 0.5rem;
 		height: min(70px, calc((100vw - 4rem) / 5));
 		justify-content: center;
 		max-width: min(70px, calc((100vw - 4rem) / 5));
+		transition: background-color 100ms ease-in-out;
 		width: 100%;
 		&:hover {
-			background-color: darken(#f3f3f3, 3);
-		}
-		&[data-disabled="disabled"] {
-			background-color: #ddd;
-			&:hover {
-				background-color: darken(#ddd, 3);
-			}
+			background-color: darken(#f3f3f3, 5);
 		}
 	}
 }
 
 .reflet-content {
-	border: 1px solid dodgerblue;
 	height: 100%;
 }
