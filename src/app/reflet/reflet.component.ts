@@ -5,7 +5,6 @@ import {
 	HostListener,
 	ViewChild,
 } from '@angular/core';
-import { NavigationComponent } from '../navigation/navigation.component';
 
 @Component({
 	selector: 'app-reflet',
@@ -33,7 +32,6 @@ export class RefletComponent implements AfterViewInit {
 	}
 
 	ngAfterViewInit() {
-		console.log(this.refletContent.nativeElement);
 		this.refletContent.nativeElement.style.maxHeight = `${this.getRefletContentHeight()}px`;
 	}
 }

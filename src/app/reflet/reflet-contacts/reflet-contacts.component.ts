@@ -28,7 +28,6 @@ export class RefletContactsComponent implements OnInit, OnDestroy {
 			if (!user) {
 				this.personalChatInformation = [];
 			}
-			console.log('user');
 			this._user = user;
 			this.chatService.fetchPersonalChatInformation();
 			this._pciSubscription =
