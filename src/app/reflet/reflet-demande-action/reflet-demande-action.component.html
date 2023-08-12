@@ -1,3 +1,32 @@
 <div class="reflet-demande-action">
-	<p>reflet-demande-action works!</p>
+	<div class="reflet-interaction__wrapper">
+		<div class="reflet-interaction">
+			<lucide-icon
+				name="split"
+				class="reflet-interaction__icon"
+			></lucide-icon>
+			<p class="reflet-interaction__text">
+				Tu as fait une demande d'action.
+			</p>
+			<div
+				class="reflet-interaction__more"
+				role="button"
+				(click)="toggleMenu()"
+			>
+				<lucide-icon
+					name="more-horizontal"
+					class="lucide-icon"
+				></lucide-icon>
+			</div>
+		</div>
+		<div class="reflet-interaction__form-box__wrapper" #formBoxWrapper>
+			<div class="reflet-interaction__form-box" #formBox>
+				<h3>Demande d'action</h3>
+				<p>
+					Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+					Ullam, voluptate! Voluptas iste itaque dicta dolor repellat.
+				</p>
+			</div>
+		</div>
+	</div>
 </div>
