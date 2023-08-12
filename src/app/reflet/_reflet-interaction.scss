@@ -22,6 +22,7 @@
 	&__more {
 		$darkerBgc: darken($bgc, 8);
 		background-color: $darkerBgc;
+		border: 1px solid #d6d6d6;
 		border-radius: 0.25rem;
 		bottom: 0.5rem;
 		position: absolute;
