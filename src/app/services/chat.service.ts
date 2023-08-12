@@ -137,7 +137,6 @@ export class ChatService {
 		this.httpRequestService
 			.post('/ore/submit/chat_msg', data, headers)
 			.subscribe((postResponse) => {
-				console.log(postResponse);
 				if (postResponse.error) {
 					throw postResponse.error;
 				}

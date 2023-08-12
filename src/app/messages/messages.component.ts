@@ -11,12 +11,12 @@ import {
 import { OreChatGroup } from '../models/ore-chat-group';
 import { Subscription } from 'rxjs';
 import { AccountService } from '../services/account.service';
-import { ChatService } from '../services/chat.service';
 import { ActivatedRoute } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { OreMembre } from '../models/ore-membre';
 import { NavigationComponent } from '../navigation/navigation.component';
 import { OreChatMessage } from '../models/ore-chat-message';
+import { ChatService } from '../services/chat.service';
 
 @Component({
 	selector: 'app-messages',

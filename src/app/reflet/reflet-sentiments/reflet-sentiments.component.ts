@@ -1,4 +1,5 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
+import { RefletSectionService } from '../services/reflet-section.service';
 
 @Component({
 	selector: 'app-reflet-sentiments',
@@ -9,21 +10,9 @@ export class RefletSentimentsComponent {
 	@ViewChild('formBoxWrapper') formBoxWrapper!: ElementRef;
 	@ViewChild('formBox') formBox!: ElementRef;
 
+	constructor(private refletSectionService: RefletSectionService) {}
+
 	toggleMenu() {
-		if (!this.formBoxWrapper || !this.formBox) {
-			return;
-		}
-
-		const height = this.formBoxWrapper?.nativeElement.style.height;
-
-		console.log(height);
-
-		if (height && height !== '0px') {
-			this.formBoxWrapper.nativeElement.style.height = 0;
-		} else {
-			const formBoxHeight =
-				this.formBox.nativeElement.getBoundingClientRect().height;
-			this.formBoxWrapper.nativeElement.style.height = `${formBoxHeight}px`;
-		}
+		this.refletSectionService.toggleMenu(this.formBoxWrapper, this.formBox);
 	}
 }

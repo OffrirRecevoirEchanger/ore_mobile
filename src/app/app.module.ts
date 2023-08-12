@@ -6,7 +6,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
-import { NavigationComponent } from './navigation/navigation.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ApiAuthenticationService } from './services/api-authentication.service';
 import { AccountService } from './services/account.service';
@@ -19,41 +18,17 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ErrorHandlerService } from './services/error-handler.service';
 import { ErrorAlertComponent } from './error-alert/error-alert.component';
 import { AdminToolService } from './services/admin-tool.service';
+import { RefletModule } from './reflet/reflet.module';
+import { NavigationModule } from './navigation/navigation.module';
 import { ChatService } from './services/chat.service';
-import { ConnectionIndicatorComponent } from './connection-indicator/connection-indicator.component';
-import { MessagesComponent } from './messages/messages.component';
-import { RefletComponent } from './reflet/reflet.component';
-import { RefletContactsComponent } from './reflet/reflet-contacts/reflet-contacts.component';
-import {
-	LucideAngularModule,
-	Users,
-	MessagesSquare,
-	Eye,
-	Smile,
-	ListTodo,
-	Split,
-	MoreHorizontal,
-} from 'lucide-angular';
-import { RefletObservationComponent } from './reflet/reflet-observation/reflet-observation.component';
-import { RefletSentimentsComponent } from './reflet/reflet-sentiments/reflet-sentiments.component';
-import { RefletBesoinComponent } from './reflet/reflet-besoin/reflet-besoin.component';
-import { RefletDemandeActionComponent } from './reflet/reflet-demande-action/reflet-demande-action.component';
+import { MessagesModule } from './messages/messages.module';
 
 @NgModule({
 	declarations: [
 		AppComponent,
 		HomeComponent,
 		LoginComponent,
-		NavigationComponent,
 		ErrorAlertComponent,
-		ConnectionIndicatorComponent,
-		MessagesComponent,
-		RefletComponent,
-		RefletContactsComponent,
-		RefletObservationComponent,
-		RefletSentimentsComponent,
-		RefletBesoinComponent,
-		RefletDemandeActionComponent,
 	],
 	imports: [
 		BrowserModule,
@@ -61,15 +36,9 @@ import { RefletDemandeActionComponent } from './reflet/reflet-demande-action/ref
 		NgbModule,
 		HttpClientModule,
 		ReactiveFormsModule,
-		LucideAngularModule.pick({
-			Users,
-			MessagesSquare,
-			Eye,
-			Smile,
-			ListTodo,
-			Split,
-			MoreHorizontal,
-		}),
+		NavigationModule,
+		RefletModule,
+		MessagesModule,
 	],
 	providers: [
 		ApiAuthenticationService,
