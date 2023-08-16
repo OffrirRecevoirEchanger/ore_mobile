@@ -1,7 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { OreChatGroup } from 'src/app/models/ore-chat-group';
-import { OreMembre } from 'src/app/models/ore-membre';
 import { AccountService } from 'src/app/services/account.service';
 import { ChatService } from 'src/app/services/chat.service';
 
@@ -13,7 +12,6 @@ import { ChatService } from 'src/app/services/chat.service';
 export class RefletContactsComponent implements OnInit, OnDestroy {
 	personalChatInformation: OreChatGroup[] = [];
 	private _activeChatGroupId!: number;
-	private _user!: OreMembre | null;
 
 	private _userSubscription!: Subscription;
 	private _pciSubscription!: Subscription;
@@ -28,7 +26,6 @@ export class RefletContactsComponent implements OnInit, OnDestroy {
 			if (!user) {
 				this.personalChatInformation = [];
 			}
-			this._user = user;
 			this.chatService.fetchPersonalChatInformation();
 			this._pciSubscription =
 				this.chatService.personalChatInformation$.subscribe(

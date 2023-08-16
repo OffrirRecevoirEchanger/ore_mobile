@@ -46,7 +46,7 @@ export class LoginComponent {
 			)
 			.subscribe((response) => {
 				this.accountService.user = response;
-				this.router.navigate(['/']);
+				this.router.navigate(['/reflet/réseau']);
 			});
 	}
 

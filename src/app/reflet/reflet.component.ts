@@ -17,6 +17,10 @@ export class RefletComponent implements AfterViewInit {
 	@ViewChild('refletOptions') refletOptions!: ElementRef<any>;
 	@ViewChild('refletContent') refletContent!: ElementRef<any>;
 
+	ngAfterViewInit() {
+		this.refletContent.nativeElement.style.maxHeight = `${this.getRefletContentHeight()}px`;
+	}
+
 	@HostListener('window:resize', ['$event'])
 	onResize(_event: any) {
 		this.refletContent.nativeElement.style.maxHeight = `${this.getRefletContentHeight()}px`;
@@ -29,9 +33,5 @@ export class RefletComponent implements AfterViewInit {
 				this.refletOptions?.nativeElement.getBoundingClientRect()
 					.height)
 		);
-	}
-
-	ngAfterViewInit() {
-		this.refletContent.nativeElement.style.maxHeight = `${this.getRefletContentHeight()}px`;
 	}
 }

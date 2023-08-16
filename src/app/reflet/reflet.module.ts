@@ -19,6 +19,7 @@ import { RefletBesoinComponent } from '../reflet/reflet-besoin/reflet-besoin.com
 import { RefletDemandeActionComponent } from '../reflet/reflet-demande-action/reflet-demande-action.component';
 import { RouterModule } from '@angular/router';
 import { NavigationModule } from '../navigation/navigation.module';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
 	declarations: [
@@ -33,6 +34,7 @@ import { NavigationModule } from '../navigation/navigation.module';
 		CommonModule,
 		RouterModule,
 		NavigationModule,
+		NgbModule,
 		LucideAngularModule.pick({
 			Users,
 			MessagesSquare,

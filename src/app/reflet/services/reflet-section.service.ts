@@ -4,8 +4,6 @@ import { ElementRef, Injectable } from '@angular/core';
 	providedIn: 'root',
 })
 export class RefletSectionService {
-	constructor() {}
-
 	toggleMenu(formBoxWrapper: ElementRef, formBox: ElementRef): void {
 		if (!formBoxWrapper || !formBox) {
 			return;

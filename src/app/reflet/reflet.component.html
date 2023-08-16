@@ -5,7 +5,8 @@
 	</div>
 	<div class="reflet-options" #refletOptions>
 		<a
-			routerLink="/reflet"
+			routerLink="/reflet/réseau"
+			routerLinkActive="reflet-options__item--active"
 			class="reflet-options__item"
 			ngbPopover="Réseau"
 			triggers="mouseenter:mouseleave"
@@ -18,6 +19,7 @@
 		</a>
 		<a
 			routerLink="/reflet/observation"
+			routerLinkActive="reflet-options__item--active"
 			class="reflet-options__item"
 			ngbPopover="Observation"
 			triggers="mouseenter:mouseleave"
@@ -30,6 +32,7 @@
 		</a>
 		<a
 			routerLink="/reflet/sentiments"
+			routerLinkActive="reflet-options__item--active"
 			class="reflet-options__item"
 			role="button"
 			ngbPopover="Sentiments"
@@ -43,6 +46,7 @@
 		</a>
 		<a
 			routerLink="/reflet/besoin"
+			routerLinkActive="reflet-options__item--active"
 			class="reflet-options__item"
 			role="button"
 			ngbPopover="Besoin"
@@ -56,6 +60,7 @@
 		</a>
 		<a
 			routerLink="/reflet/demande_action"
+			routerLinkActive="reflet-options__item--active"
 			class="reflet-options__item"
 			role="button"
 			ngbPopover="Demande d'action"

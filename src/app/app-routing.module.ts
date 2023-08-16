@@ -19,7 +19,7 @@ const routes: Routes = [
 		component: RefletComponent,
 		children: [
 			{
-				path: '',
+				path: 'réseau',
 				component: RefletContactsComponent,
 			},
 			{
@@ -37,6 +37,11 @@ const routes: Routes = [
 			{
 				path: 'demande_action',
 				component: RefletDemandeActionComponent,
+			},
+			{
+				path: '',
+				redirectTo: 'réseau',
+				pathMatch: 'full',
 			},
 		],
 	},
