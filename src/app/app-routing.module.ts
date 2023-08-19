@@ -9,6 +9,7 @@ import { RefletObservationComponent } from './reflet/reflet-observation/reflet-o
 import { RefletSentimentsComponent } from './reflet/reflet-sentiments/reflet-sentiments.component';
 import { RefletBesoinComponent } from './reflet/reflet-besoin/reflet-besoin.component';
 import { RefletDemandeActionComponent } from './reflet/reflet-demande-action/reflet-demande-action.component';
+import { RefletChatComponent } from './reflet/reflet-chat/reflet-chat.component';
 
 const routes: Routes = [
 	{ path: '', component: HomeComponent },
@@ -21,6 +22,10 @@ const routes: Routes = [
 			{
 				path: 'réseau',
 				component: RefletContactsComponent,
+			},
+			{
+				path: 'messages',
+				component: RefletChatComponent,
 			},
 			{
 				path: 'observation',

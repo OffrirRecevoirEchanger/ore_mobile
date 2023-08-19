@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { ErrorHandler, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RefletSectionService } from './services/reflet-section.service';
 import { RefletComponent } from '../reflet/reflet.component';
@@ -20,6 +20,11 @@ import { RefletDemandeActionComponent } from '../reflet/reflet-demande-action/re
 import { RouterModule } from '@angular/router';
 import { NavigationModule } from '../navigation/navigation.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ErrorHandlerService } from '../services/error-handler.service';
+import { RefletChatComponent } from './reflet-chat/reflet-chat.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { ChatService } from '../services/chat.service';
+import { AccountService } from '../services/account.service';
 
 @NgModule({
 	declarations: [
@@ -29,12 +34,14 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 		RefletSentimentsComponent,
 		RefletBesoinComponent,
 		RefletDemandeActionComponent,
+		RefletChatComponent,
 	],
 	imports: [
 		CommonModule,
 		RouterModule,
 		NavigationModule,
 		NgbModule,
+		ReactiveFormsModule,
 		LucideAngularModule.pick({
 			Users,
 			MessagesSquare,
@@ -45,7 +52,15 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 			MoreHorizontal,
 		}),
 	],
-	providers: [RefletSectionService],
+	providers: [
+		AccountService,
+		ChatService,
+		RefletSectionService,
+		{
+			provide: ErrorHandler,
+			useExisting: ErrorHandlerService,
+		},
+	],
 	exports: [RefletComponent],
 })
 export class RefletModule {}

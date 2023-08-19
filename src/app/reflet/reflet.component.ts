@@ -5,6 +5,7 @@ import {
 	HostListener,
 	ViewChild,
 } from '@angular/core';
+import { RefletSectionService } from './services/reflet-section.service';
 
 @Component({
 	selector: 'app-reflet',
@@ -17,21 +18,31 @@ export class RefletComponent implements AfterViewInit {
 	@ViewChild('refletOptions') refletOptions!: ElementRef<any>;
 	@ViewChild('refletContent') refletContent!: ElementRef<any>;
 
+	private set refletContentHeight(newHeight: number) {
+		this.refletSectionService.refletContentHeight = newHeight;
+	}
+
+	constructor(private refletSectionService: RefletSectionService) {}
+
 	ngAfterViewInit() {
-		this.refletContent.nativeElement.style.maxHeight = `${this.getRefletContentHeight()}px`;
+		this.refletSectionService.refletContentHeight$.subscribe(
+			(newHeight) => {
+				this.refletContent.nativeElement.style.maxHeight = `${newHeight}px`;
+			}
+		);
+		this.calculateRefletContentHeight();
 	}
 
 	@HostListener('window:resize', ['$event'])
 	onResize(_event: any) {
-		this.refletContent.nativeElement.style.maxHeight = `${this.getRefletContentHeight()}px`;
+		this.calculateRefletContentHeight();
 	}
 
-	getRefletContentHeight(): number {
-		return (
+	calculateRefletContentHeight(): void {
+		this.refletContentHeight =
 			this.mainElement?.nativeElement.getBoundingClientRect().height -
 			(this.refletTop?.nativeElement.getBoundingClientRect().height +
 				this.refletOptions?.nativeElement.getBoundingClientRect()
-					.height)
-		);
+					.height);
 	}
 }
