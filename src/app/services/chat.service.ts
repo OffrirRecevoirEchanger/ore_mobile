@@ -1,6 +1,12 @@
 import { Injectable, NgZone } from '@angular/core';
 import { HttpRequestService } from './http-request/http-request.service';
-import { BehaviorSubject, Observable, ReplaySubject, Subject } from 'rxjs';
+import {
+	BehaviorSubject,
+	Observable,
+	ReplaySubject,
+	Subject,
+	first,
+} from 'rxjs';
 import { ErrorHandlerService } from './error-handler.service';
 import { env } from 'src/environment/environment';
 import { OreChatMessage } from '../models/ore-chat-message';
@@ -14,7 +20,7 @@ import { OreMembre } from '../models/ore-membre';
 export class ChatService {
 	private last = 0;
 	private _isLongPollingConnected = new BehaviorSubject<boolean>(false);
-	private _activeChatGroupId = new ReplaySubject<number>();
+	private _activeChatGroupIdSubject = new ReplaySubject<number>();
 	private _personalChatInformation: OreChatGroup[] = [];
 	private _personalChatInformationSubject = new ReplaySubject<
 		OreChatGroup[]
@@ -29,11 +35,11 @@ export class ChatService {
 	}
 
 	get activeChatGroupId$(): Observable<number> {
-		return this._activeChatGroupId.asObservable();
+		return this._activeChatGroupIdSubject.asObservable();
 	}
 
 	set activeChatGroupId(activeChatGroupId: number) {
-		this._activeChatGroupId.next(activeChatGroupId);
+		this._activeChatGroupIdSubject.next(activeChatGroupId);
 	}
 
 	get personalChatInformation$(): Observable<OreChatGroup[]> {
@@ -77,7 +83,10 @@ export class ChatService {
 			jsonrpc: '2.0',
 			method: 'call',
 			params: {
-				channels: ['ore.notification.message'],
+				channels: [
+					'ore.notification.message',
+					'ore.notification.message.read',
+				],
 				last: this.last,
 			},
 		};
@@ -89,11 +98,7 @@ export class ChatService {
 			this.httpRequestService
 				.post('/longpolling/poll', data, headers)
 				.subscribe((response) => {
-					const result = response.result;
-					if (result.length > 0) {
-						this.addNewMessages(result);
-					}
-					setTimeout(() => this.poll(), env.longPollingDelay);
+					this.processLongPollingResponse(response);
 				});
 		});
 	}
@@ -177,6 +182,22 @@ export class ChatService {
 		return groups;
 	}
 
+	private processLongPollingResponse(response: any) {
+		const result = response.result;
+		if (result.length > 0) {
+			const channel = result[0]?.channel;
+			switch (channel) {
+				case 'ore.notification.message':
+					this.addNewMessages(result);
+					break;
+				case 'ore.notification.message.read':
+					this.updateIsRead(result);
+					break;
+			}
+		}
+		setTimeout(() => this.poll(), env.longPollingDelay);
+	}
+
 	private addNewMessages(result: any) {
 		this.last = result[result.length - 1].id;
 		const newMessagesToSend: any[] = [];
@@ -198,22 +219,104 @@ export class ChatService {
 
 		for (const message of messages) {
 			for (const oreChatGroup of personalChatInformation) {
-				if (oreChatGroup.groupId === message.group_id) {
-					const newMessage = new OreChatMessage(
-						message.id,
-						message.is_read,
-						message.m_id,
-						message.name
-					);
-					oreChatGroup.messages.push(newMessage);
-					subject.next(newMessage);
-					subject.complete();
+				if (oreChatGroup.groupId !== message.group_id) {
+					continue;
 				}
+
+				const newMessage = new OreChatMessage(
+					message.id,
+					message.is_read,
+					message.m_id,
+					message.name
+				);
+				oreChatGroup.messages.push(newMessage);
+				subject.next(newMessage);
+				subject.complete();
 			}
 		}
 
 		this._newMessagesFromLongPollingSubject.next(messages);
 
 		return subject.asObservable();
+	}
+
+	getMessage(
+		id: number | undefined,
+		activeChatGroupId: number
+	): OreChatMessage | undefined {
+		if (!id) {
+			return;
+		}
+
+		const activeChatGroup = this._personalChatInformation.filter(
+			(group) => group.groupId === activeChatGroupId
+		)[0];
+
+		if (!activeChatGroup?.messages) {
+			return;
+		}
+
+		const matchingMessages = activeChatGroup.messages.filter(
+			(message) => message.id === id
+		);
+
+		if (!matchingMessages) {
+			return;
+		}
+
+		return matchingMessages[0];
+	}
+
+	setMessageIsRead(id: number): void {
+		const data = {
+			jsonrpc: '2.0',
+			method: 'call',
+			params: {
+				msg_id: id,
+			},
+		};
+		const headers = {
+			'Content-Type': 'application/json',
+		};
+		this.httpRequestService
+			.post('/ore/read/chat_msg', data, headers)
+			.pipe(first())
+			.subscribe((response) => {
+				if (response.error) {
+					throw response;
+				}
+			});
+	}
+
+	private updateIsRead(result: any): void {
+		if (result?.length < 1) {
+			return;
+		}
+
+		this.last = result[result.length - 1].id;
+		const id = result[0]?.message?.field_id;
+		const groupId = result[0]?.message?.group_id;
+
+		if (!id || !groupId) {
+			return;
+		}
+
+		const matchingGroups = this._personalChatInformation.filter(
+			(group) => group.groupId === groupId
+		);
+
+		if (matchingGroups.length < 1) {
+			return;
+		}
+
+		const matchingMessages = matchingGroups[0].messages.filter(
+			(message) => message.id === id
+		);
+
+		if (matchingMessages.length < 1) {
+			return;
+		}
+
+		matchingMessages[0].isRead = true;
 	}
 }

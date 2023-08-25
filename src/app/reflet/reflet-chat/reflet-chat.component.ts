@@ -10,7 +10,7 @@ import {
 } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Subscription, first } from 'rxjs';
 import { OreChatGroup } from 'src/app/models/ore-chat-group';
 import { OreChatMessage } from 'src/app/models/ore-chat-message';
 import { OreMembre } from 'src/app/models/ore-membre';
@@ -38,6 +38,8 @@ export class RefletChatComponent implements OnInit, AfterViewInit, OnDestroy {
 	private _userSubscription!: Subscription;
 	private _refletContentHeightSubscription!: Subscription;
 	private _newMessagesSubscription!: Subscription;
+
+	private _messagesIntersectionObserver!: IntersectionObserver;
 
 	private _activeChatGroupId!: number;
 
@@ -141,6 +143,7 @@ export class RefletChatComponent implements OnInit, AfterViewInit, OnDestroy {
 		}
 		const observer = new MutationObserver((_mutations) => {
 			this.scrollToBottom(this.messageList.nativeElement, 'instant');
+			this.readUnreadMessages();
 		});
 		observer.observe(this.messageList.nativeElement, {
 			attributes: false,
@@ -205,6 +208,50 @@ export class RefletChatComponent implements OnInit, AfterViewInit, OnDestroy {
 					}
 				}
 			);
+	}
+
+	private readUnreadMessages() {
+		if (!this.messageList?.nativeElement) {
+			return;
+		}
+
+		this._messagesIntersectionObserver = new IntersectionObserver(
+			(entries) => {
+				for (const entry of entries) {
+					if (!entry.isIntersecting) {
+						continue;
+					}
+
+					const target: HTMLElement = entry.target as HTMLElement;
+					const id = target.dataset['id'];
+
+					if (!id) {
+						continue;
+					}
+
+					const message = this.chatService.getMessage(
+						parseInt(id),
+						this._activeChatGroupId
+					);
+
+					if (
+						!message ||
+						message.isRead ||
+						message.memberId === this.user.id
+					) {
+						continue;
+					}
+
+					this.chatService.setMessageIsRead(parseInt(id));
+				}
+			}
+		);
+
+		for (const message of this.messageList.nativeElement.getElementsByTagName(
+			'li'
+		)) {
+			this._messagesIntersectionObserver.observe(message);
+		}
 	}
 
 	ngOnDestroy() {
