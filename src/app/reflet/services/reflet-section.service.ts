@@ -8,14 +8,28 @@ export class RefletSectionService {
 	private _refletContentHeight!: number;
 	private _refletContentHeightSubject = new ReplaySubject<number>();
 
+	private _mainMaxHeight!: number;
+	private _mainMaxHeightSubject = new ReplaySubject<number>();
+
 	get refletContentHeight$(): Observable<number> {
 		return this._refletContentHeightSubject.asObservable();
+	}
+
+	get mainMaxHeight$(): Observable<number> {
+		return this._mainMaxHeightSubject.asObservable();
 	}
 
 	set refletContentHeight(newHeight: number) {
 		if (newHeight !== this._refletContentHeight) {
 			this._refletContentHeight = newHeight;
-			this._refletContentHeightSubject.next(this._refletContentHeight);
+			this._refletContentHeightSubject.next(newHeight);
+		}
+	}
+
+	set mainMaxHeight(newHeight: number) {
+		if (newHeight !== this._mainMaxHeight) {
+			this._mainMaxHeight = newHeight;
+			this._mainMaxHeightSubject.next(newHeight);
 		}
 	}
 

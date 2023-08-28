@@ -26,6 +26,7 @@ import { RefletSectionService } from '../services/reflet-section.service';
 })
 export class RefletChatComponent implements OnInit, AfterViewInit, OnDestroy {
 	@ViewChild('main') main!: ElementRef;
+	@ViewChild('refletChat') refletChat!: ElementRef;
 	@ViewChild('messagesTopBar') messagesTopBar!: ElementRef;
 	@ViewChild('textBarWrapper') textBarWrapper!: ElementRef;
 	@ViewChild('messageList') messageList!: ElementRef;
@@ -196,16 +197,34 @@ export class RefletChatComponent implements OnInit, AfterViewInit, OnDestroy {
 		this._refletContentHeightSubscription =
 			this.refletSectionService.refletContentHeight$.subscribe(
 				(newHeight) => {
+					const refletChat = this.refletChat?.nativeElement;
 					const messageList = this.messageList?.nativeElement;
 					const textBarWrapper = this.textBarWrapper?.nativeElement;
-					if (messageList && textBarWrapper) {
-						const remValueInPixels = 16;
-						messageList.style.maxHeight = `${
-							newHeight -
-							(remValueInPixels * 4 +
-								textBarWrapper.getBoundingClientRect().height)
-						}px`;
+
+					if (!refletChat || !messageList || !textBarWrapper) {
+						return;
 					}
+
+					const refletChatComputedStyle: CSSStyleDeclaration =
+						window.getComputedStyle(refletChat);
+
+					const refletChatPaddingTop = this.removePixelValue(
+						refletChatComputedStyle.paddingTop
+					);
+					const refletChatPaddingBottom = this.removePixelValue(
+						refletChatComputedStyle.paddingBottom
+					);
+
+					if (!refletChatPaddingTop || !refletChatPaddingBottom) {
+						return;
+					}
+
+					messageList.style.maxHeight = `${
+						newHeight -
+						(refletChatPaddingTop +
+							refletChatPaddingBottom +
+							textBarWrapper.getBoundingClientRect().height)
+					}px`;
 				}
 			);
 	}
@@ -252,6 +271,13 @@ export class RefletChatComponent implements OnInit, AfterViewInit, OnDestroy {
 		)) {
 			this._messagesIntersectionObserver.observe(message);
 		}
+	}
+
+	private removePixelValue(value: string): number | undefined {
+		if (value.substring(value.length - 2) !== 'px') {
+			return;
+		}
+		return parseFloat(value.substring(0, value.length - 2));
 	}
 
 	ngOnDestroy() {
