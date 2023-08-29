@@ -10,7 +10,7 @@ import {
 } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { Subscription, first } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { OreChatGroup } from 'src/app/models/ore-chat-group';
 import { OreChatMessage } from 'src/app/models/ore-chat-message';
 import { OreMembre } from 'src/app/models/ore-membre';
@@ -89,14 +89,12 @@ export class RefletChatComponent implements OnInit, AfterViewInit, OnDestroy {
 	ngOnInit() {
 		this._userSubscription = this.accountService.user$.subscribe((user) => {
 			if (!user) {
-				this.personalChatInformation = [];
 				return;
 			}
 			this.user = user;
-			this.chatService.fetchPersonalChatInformation();
-			this.setPciSubscription();
 			this.setActiveChatGroupIdSubscription();
 		});
+		this.setPciSubscription();
 	}
 
 	ngAfterViewInit() {
@@ -147,8 +145,8 @@ export class RefletChatComponent implements OnInit, AfterViewInit, OnDestroy {
 			this.readUnreadMessages();
 		});
 		observer.observe(this.messageList.nativeElement, {
-			attributes: false,
-			childList: true,
+			attributes: true,
+			childList: false,
 			characterData: false,
 		});
 	}

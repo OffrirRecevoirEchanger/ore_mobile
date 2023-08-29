@@ -1,7 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { OreChatGroup } from 'src/app/models/ore-chat-group';
-import { AccountService } from 'src/app/services/account.service';
 import { ChatService } from 'src/app/services/chat.service';
 
 @Component({
@@ -13,27 +12,17 @@ export class RefletContactsComponent implements OnInit, OnDestroy {
 	personalChatInformation: OreChatGroup[] = [];
 	private _activeChatGroupId!: number;
 
-	private _userSubscription!: Subscription;
 	private _pciSubscription!: Subscription;
 
-	constructor(
-		private accountService: AccountService,
-		private chatService: ChatService
-	) {}
+	constructor(private chatService: ChatService) {}
 
 	ngOnInit() {
-		this._userSubscription = this.accountService.user$.subscribe((user) => {
-			if (!user) {
-				this.personalChatInformation = [];
-			}
-			this.chatService.fetchPersonalChatInformation();
-			this._pciSubscription =
-				this.chatService.personalChatInformation$.subscribe(
-					(personalChatInformation: OreChatGroup[]) => {
-						this.personalChatInformation = personalChatInformation;
-					}
-				);
-		});
+		this._pciSubscription =
+			this.chatService.personalChatInformation$.subscribe(
+				(personalChatInformation: OreChatGroup[]) => {
+					this.personalChatInformation = personalChatInformation;
+				}
+			);
 	}
 
 	isActiveChatGroup(chatGroupId: number): boolean {
@@ -42,6 +31,5 @@ export class RefletContactsComponent implements OnInit, OnDestroy {
 
 	ngOnDestroy() {
 		this._pciSubscription?.unsubscribe();
-		this._userSubscription?.unsubscribe();
 	}
 }

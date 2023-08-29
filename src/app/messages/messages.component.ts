@@ -86,7 +86,9 @@ export class MessagesComponent implements OnInit, AfterViewInit, OnDestroy {
 				return;
 			}
 			this.user = user;
-			this.chatService.fetchPersonalChatInformation();
+			if (!this.personalChatInformation) {
+				this.chatService.fetchPersonalChatInformation();
+			}
 			this._pciSubscription =
 				this.chatService.personalChatInformation$.subscribe(
 					(personalChatInformation: OreChatGroup[]) => {
