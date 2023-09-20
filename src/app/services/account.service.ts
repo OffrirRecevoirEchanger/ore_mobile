@@ -29,12 +29,12 @@ export class AccountService {
 		private apiAuthenticationService: ApiAuthenticationService,
 		private oreMembreService: OreMembreService
 	) {
-		this.oreMembreService.get().subscribe((user) => {
+		/* this.oreMembreService.get().subscribe((user: OreMembre | null) => {
 			if (user) {
 				this.user = user;
 			}
 			this._isDoneFetchingLocalUser.next(true);
-		});
+		}); */
 	}
 
 	login(username: string, password: string): Observable<OreMembre | null> {

@@ -142,7 +142,7 @@ export class RefletChatComponent implements OnInit, AfterViewInit, OnDestroy {
 		}
 		const observer = new MutationObserver((_mutations) => {
 			this.scrollToBottom(this.messageList.nativeElement, 'instant');
-			this.readUnreadMessages();
+			//this.readUnreadMessages();
 		});
 		observer.observe(this.messageList.nativeElement, {
 			attributes: true,
