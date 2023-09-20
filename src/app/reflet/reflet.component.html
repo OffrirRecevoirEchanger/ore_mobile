@@ -3,77 +3,85 @@
 	<div class="reflet-top" #refletTop>
 		<h2 class="reflet-top__text">Reflet</h2>
 	</div>
-	<div class="reflet-options" #refletOptions>
-		<a
-			routerLink="/reflet/réseau"
-			routerLinkActive="reflet-options__item--active"
-			class="reflet-options__item"
-			ngbPopover="Réseau"
-			triggers="mouseenter:mouseleave"
-			placement="bottom-start"
-		>
-			<lucide-icon
-				name="users"
-				class="lucide-icon reflet-options__icon"
-			></lucide-icon>
-		</a>
-		<a
-			routerLink="/reflet/observation"
-			routerLinkActive="reflet-options__item--active"
-			class="reflet-options__item"
-			ngbPopover="Observation"
-			triggers="mouseenter:mouseleave"
-			placement="bottom"
-		>
-			<lucide-icon
-				name="eye"
-				class="lucide-icon reflet-options__icon"
-			></lucide-icon>
-		</a>
-		<a
-			routerLink="/reflet/sentiments"
-			routerLinkActive="reflet-options__item--active"
-			class="reflet-options__item"
-			role="button"
-			ngbPopover="Sentiments"
-			triggers="mouseenter:mouseleave"
-			placement="bottom"
-		>
-			<lucide-icon
-				name="smile"
-				class="lucide-icon reflet-options__icon"
-			></lucide-icon>
-		</a>
-		<a
-			routerLink="/reflet/besoin"
-			routerLinkActive="reflet-options__item--active"
-			class="reflet-options__item"
-			role="button"
-			ngbPopover="Besoin"
-			triggers="mouseenter:mouseleave"
-			placement="bottom"
-		>
-			<lucide-icon
-				name="list-todo"
-				class="lucide-icon reflet-options__icon"
-			></lucide-icon>
-		</a>
-		<a
-			routerLink="/reflet/demande_action"
-			routerLinkActive="reflet-options__item--active"
-			class="reflet-options__item"
-			role="button"
-			ngbPopover="Demande d'action"
-			triggers="mouseenter:mouseleave"
-			placement="bottom-end"
-		>
-			<lucide-icon
-				name="split"
-				class="lucide-icon reflet-options__icon"
-			></lucide-icon>
-		</a>
-	</div>
-	<div class="reflet-content" #refletContent>
-		<router-outlet></router-outlet>
+	<div class="reflet-lr__wrapper">
+		<div class="reflet-left">
+			<div class="reflet-options" #refletOptions>
+				<a
+					routerLink="/reflet/réseau"
+					routerLinkActive="reflet-options__item--active"
+					class="reflet-options__item"
+					ngbPopover="Réseau"
+					triggers="mouseenter:mouseleave"
+					placement="bottom-start"
+				>
+					<lucide-icon
+						name="users"
+						class="lucide-icon reflet-options__icon"
+					></lucide-icon>
+				</a>
+				<a
+					routerLink="/reflet/observation"
+					routerLinkActive="reflet-options__item--active"
+					class="reflet-options__item"
+					ngbPopover="Observation"
+					triggers="mouseenter:mouseleave"
+					placement="bottom"
+				>
+					<lucide-icon
+						name="eye"
+						class="lucide-icon reflet-options__icon"
+					></lucide-icon>
+				</a>
+				<a
+					routerLink="/reflet/sentiments"
+					routerLinkActive="reflet-options__item--active"
+					class="reflet-options__item"
+					role="button"
+					ngbPopover="Sentiments"
+					triggers="mouseenter:mouseleave"
+					placement="bottom"
+				>
+					<lucide-icon
+						name="smile"
+						class="lucide-icon reflet-options__icon"
+					></lucide-icon>
+				</a>
+				<a
+					routerLink="/reflet/besoin"
+					routerLinkActive="reflet-options__item--active"
+					class="reflet-options__item"
+					role="button"
+					ngbPopover="Besoin"
+					triggers="mouseenter:mouseleave"
+					placement="bottom"
+				>
+					<lucide-icon
+						name="list-todo"
+						class="lucide-icon reflet-options__icon"
+					></lucide-icon>
+				</a>
+				<a
+					routerLink="/reflet/demande_action"
+					routerLinkActive="reflet-options__item--active"
+					class="reflet-options__item"
+					role="button"
+					ngbPopover="Demande d'action"
+					triggers="mouseenter:mouseleave"
+					placement="bottom-end"
+				>
+					<lucide-icon
+						name="split"
+						class="lucide-icon reflet-options__icon"
+					></lucide-icon>
+				</a>
+			</div>
+			<div class="reflet-content" #refletContent>
+				<router-outlet></router-outlet>
+			</div>
+		</div>
+		<div class="reflet-right">
+			<div class="reflet-profile"></div>
+			<div class="reflet-contacts"></div>
+		</div>
 	</div>
 </main>

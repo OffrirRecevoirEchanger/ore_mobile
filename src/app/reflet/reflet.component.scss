@@ -19,6 +19,19 @@
 	}
 }
 
+.reflet-lr__wrapper {
+	display: flex;
+}
+
+.reflet-left,
+.reflet-right {
+	flex: 1;
+}
+
+.reflet-profile {
+	//
+}
+
 .reflet-options {
 	align-items: center;
 	display: flex;
